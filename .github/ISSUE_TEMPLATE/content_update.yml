@@ -1,0 +1,25 @@
+name: 📝 Content update
+description: Report outdated text, a broken link, or request an event / speaker / partner update
+title: "[Content]: "
+labels: ["content", "triage"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      placeholder: https://ourdomain.com/...
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What is currently shown
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What it should be
+      description: Provide the exact text, link, or asset. Only submit images you have the right to publish.
+    validations:
+      required: true

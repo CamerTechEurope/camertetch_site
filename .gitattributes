@@ -1,0 +1,22 @@
+# Normalise line endings so the repo is identical on every OS
+* text=auto eol=lf
+
+# Windows-specific scripts keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.mp4 binary
+*.woff binary
+*.woff2 binary
+
+# Keep the lockfile out of noisy diffs
+package-lock.json -diff linguist-generated

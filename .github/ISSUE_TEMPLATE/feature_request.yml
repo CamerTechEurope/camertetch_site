@@ -1,0 +1,35 @@
+name: ✨ Feature request
+description: Suggest an improvement to the website
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Before requesting
+      options:
+        - label: I searched existing issues and this has not been suggested yet.
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What would this improve, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the change you would like to see. Mock-ups welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to open a pull request for this.

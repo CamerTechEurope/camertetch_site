@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/CamerTechEurope/camertetch_site/security/advisories/new
+    about: Please report security issues privately, never in a public issue. See SECURITY.md.
+  - name: 💬 Questions and ideas
+    url: https://ourdomain.com/#join
+    about: For general questions about CamerTech Europe, reach the team through the website.
