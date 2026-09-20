@@ -17,6 +17,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     const saved = (localStorage.getItem("ct-theme") as Theme) || "light";
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage is only readable after hydration
     setTheme(saved);
     document.documentElement.setAttribute("data-theme", saved);
   }, []);

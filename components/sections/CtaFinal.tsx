@@ -7,26 +7,30 @@ export default function CtaFinal() {
   return (
     <section style={{ background: "var(--bg)", padding: "8rem 2rem" }}>
       <div style={{ maxWidth: 680, margin: "0 auto", textAlign: "center" }} className="reveal">
-        <h2 style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
-          fontWeight: 800,
-          letterSpacing: "-0.04em",
-          lineHeight: 1.08,
-          color: "var(--text)",
-          marginBottom: "1.25rem",
-        }}>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.08,
+            color: "var(--text)",
+            marginBottom: "1.25rem",
+          }}
+        >
           Ensemble, on transforme les connexions en{" "}
           <span style={{ color: "var(--ct-green)" }}>opportunités.</span>
         </h2>
 
-        <p style={{
-          fontSize: "clamp(15px, 1.5vw, 18px)",
-          color: "var(--text-muted)",
-          lineHeight: 1.72,
-          maxWidth: 520,
-          margin: "0 auto 2.5rem",
-        }}>
+        <p
+          style={{
+            fontSize: "clamp(15px, 1.5vw, 18px)",
+            color: "var(--text-muted)",
+            lineHeight: 1.72,
+            maxWidth: 520,
+            margin: "0 auto 2.5rem",
+          }}
+        >
           Camer&apos;Tech Europe, c&apos;est le mouvement tech de la diaspora camerounaise.
           Ambitieux, structuré, humain.
         </p>
@@ -46,7 +50,6 @@ export default function CtaFinal() {
     </section>
   );
 }
-
 
 // ============================================
 // app/layout.tsx
@@ -115,7 +118,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 */
 
-
 // ============================================
 // useReveal.ts — hook scroll reveal
 // Coller dans lib/useReveal.ts
@@ -143,7 +145,6 @@ export function useReveal() {
   }, []);
 }
 */
-
 
 // ============================================
 // NOTES D'INTÉGRATION
