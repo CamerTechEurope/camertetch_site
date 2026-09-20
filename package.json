@@ -2,15 +2,32 @@
   "name": "camertech-europe",
   "version": "0.1.0",
   "private": true,
+  "description": "Official website of CamerTech Europe",
+  "license": "MIT",
+  "homepage": "https://ourdomain.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamerTechEurope/camertetch_site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CamerTechEurope/camertetch_site/issues"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run typecheck && npm run format:check"
   },
   "dependencies": {
     "framer-motion": "^11.15.0",
-    "next": "^16.2.6",
+    "next": "^16.3.5",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
@@ -20,9 +37,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "15.1.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
     "postcss": "^8",
+    "prettier": "^3.9.8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

@@ -12,14 +12,14 @@ const config: Config = {
       colors: {
         green: {
           DEFAULT: "#0F8F5B",
-          hover:   "#0d7a4e",
-          light:   "#e8f5ee",
-          mid:     "#c8e8d8",
-          dim:     "rgba(15,143,91,0.08)",
+          hover: "#0d7a4e",
+          light: "#e8f5ee",
+          mid: "#c8e8d8",
+          dim: "rgba(15,143,91,0.08)",
         },
         yellow: {
           DEFAULT: "#C89A2A",
-          light:   "#fdf6e3",
+          light: "#fdf6e3",
         },
         red: {
           ct: "#B03325",
@@ -27,7 +27,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-bricolage)", "sans-serif"],
-        body:    ["var(--font-dm)", "sans-serif"],
+        body: ["var(--font-dm)", "sans-serif"],
       },
     },
   },

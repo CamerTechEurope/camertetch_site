@@ -1,0 +1,77 @@
+# OpenSSF Security Insights — machine-readable summary of this project's security posture.
+# Spec: https://github.com/ossf/security-insights-spec
+header:
+  schema-version: 1.0.0
+  expiration-date: "2027-09-20T00:00:00.000Z"
+  last-updated: "2026-09-20"
+  last-reviewed: "2026-09-20"
+  project-url: "https://github.com/CamerTechEurope/camertetch_site"
+  license: "https://github.com/CamerTechEurope/camertetch_site/blob/main/LICENSE"
+project-lifecycle:
+  bug-fixes-only: false
+  core-maintainers:
+    - https://github.com/CamerTechEurope/camertetch_site/blob/main/MAINTAINERS.md
+  status: Active
+contribution-policy:
+  accepts-pull-requests: true
+  accepts-automated-pull-requests: true
+  automated-tools-list:
+    - automated-tool: dependabot
+      action: allowed
+      path:
+        - /
+  contributing-policy: "https://github.com/CamerTechEurope/camertetch_site/blob/main/CONTRIBUTING.md"
+  code-of-conduct: "https://github.com/CamerTechEurope/camertetch_site/blob/main/CODE_OF_CONDUCT.md"
+documentation:
+  - "https://github.com/CamerTechEurope/camertetch_site#readme"
+distribution-points:
+  - "https://ourdomain.com"
+  - "https://github.com/CamerTechEurope/camertetch_site"
+security-testing:
+  - tool-type: sca
+    tool-name: Dependabot
+    tool-version: "2"
+    tool-url: https://github.com/dependabot
+    integration:
+      ad-hoc: false
+      ci: true
+      before-release: false
+  - tool-type: sca
+    tool-name: Dependency Review
+    tool-version: latest
+    tool-url: https://github.com/actions/dependency-review-action
+    integration:
+      ad-hoc: false
+      ci: true
+      before-release: false
+  - tool-type: sast
+    tool-name: CodeQL
+    tool-version: latest
+    tool-url: https://codeql.github.com/
+    integration:
+      ad-hoc: false
+      ci: true
+      before-release: false
+  - tool-type: sast
+    tool-name: zizmor
+    tool-version: latest
+    tool-url: https://github.com/zizmorcore/zizmor
+    integration:
+      ad-hoc: false
+      ci: true
+      before-release: false
+security-contacts:
+  - type: email
+    value: security@ourdomain.com
+    primary: true
+vulnerability-reporting:
+  accepts-vulnerability-reports: true
+  email-contact: security@ourdomain.com
+  security-policy: "https://github.com/CamerTechEurope/camertetch_site/blob/main/SECURITY.md"
+  bug-bounty-available: false
+dependencies:
+  third-party-packages: true
+  dependencies-lists:
+    - "https://github.com/CamerTechEurope/camertetch_site/blob/main/package.json"
+  dependencies-lifecycle:
+    policy-url: "https://github.com/CamerTechEurope/camertetch_site/blob/main/SECURITY.md"
