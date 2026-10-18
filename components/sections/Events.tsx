@@ -1,152 +1,352 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
 import Image from "next/image";
-import { FadeUp, stagger, fadeItem, SecLabel, SecTitle, Hl } from "@/components/ui/primitives";
+import Link from "next/link";
+import { ArrowRight, X, Check, ChevronLeft, ChevronRight } from "lucide-react";
 
-const EVENTS = [
+interface EventItem {
+  num: string;
+  tag: string;
+  tagClass: string;
+  title: string;
+  subtitle: string;
+  poster: string;
+  points: string[];
+  speakerName: string;
+  speakerRole: string;
+  speakerAvatar: string | null;
+  speakerInitials: string;
+  format: string;
+}
+
+const EVENTS: EventItem[] = [
   {
-    num: "01", tag: "Carrière", tagColor: "green",
-    title: "Réussir ses entretiens",
-    points: ["Simulations d'entretiens RH et techniques","Conseils spécifiques aux ESN","Stratégies de préparation carrière","Feedback personnalisé par des experts"],
-    speaker: { initials: "CT", name: "Workshop collectif", role: "Simulation · Feedback · Coaching" },
-    posterSrc: "/images/events/affiche-entretiens.jpg",   // ← /images/events/affiche-entretiens.jpg
-    speakerSrc: null as string | null,  // ← /images/speakers/coach.jpg
-    posterPath: "/images/events/affiche-entretiens.jpg",
-    speakerPath: "/images/speakers/coach.jpg",
-    tagStyle: { bg: "var(--green-light)", color: "var(--green)", border: "1px solid var(--border)" },
+    num: "01",
+    tag: "Carrière",
+    tagClass: "event-tag",
+    title: "Réussir ses entretiens en ESN & Grands Groupes",
+    subtitle: "Workshop immersif de simulation et préparation aux recrutements tech",
+    poster: "/images/events/affiche-entretiens.jpg",
+    format: "Workshop interactif & Coaching individuel",
+    points: [
+      "Simulations d'entretiens RH et techniques en conditions réelles",
+      "Conseils spécifiques aux ESN et grilles de salaires en Europe",
+      "Stratégies de négociation et valorisation des expériences",
+      "Feedback personnalisé et revues de CV par des experts seniors",
+    ],
+    speakerName: "Workshop Collectif",
+    speakerRole: "Simulation · Feedback · Coaching RH",
+    speakerAvatar: null,
+    speakerInitials: "CT",
   },
   {
-    num: "02", tag: "Inspiration", tagColor: "yellow",
-    title: "William Elong Live",
-    points: ["Freelancing & levée de fonds tech","Contrats et projets d'envergure","IA, cybersécurité et innovation africaine","Forbes Top 30 Africa · créateur de drone"],
-    speaker: { initials: "WE", name: "William Elong", role: "Entrepreneur · Forbes Top 30 Africa" },
-    posterSrc: "/images/events/affiche-william-elong.jpg",
-    speakerSrc: null as string | null,
-    posterPath: "/images/events/affiche-william-elong.jpg",
-    speakerPath: "/images/speakers/william-elong.jpg",
-    tagStyle: { bg: "var(--yellow-light)", color: "var(--yellow)", border: "1px solid rgba(200,154,42,0.22)" },
+    num: "02",
+    tag: "Inspiration",
+    tagClass: "event-tag y",
+    title: "William Elong Live — De Yaoundé à Forbes Top 30",
+    subtitle: "Rencontre d'exception avec un pionnier des technologies émergentes",
+    poster: "/images/events/affiche-william-elong.jpg",
+    format: "Conférence Keynote & Session Q&A",
+    points: [
+      "Freelancing d'élite & structuration de levées de fonds tech",
+      "Signature de contrats et projets d'envergure internationale",
+      "Intelligence artificielle, drones civils et souveraineté africaine",
+      "Parcours entrepreneurial, échecs surmontés et vision stratégique",
+    ],
+    speakerName: "William Elong",
+    speakerRole: "Entrepreneur · Forbes Top 30 Africa",
+    speakerAvatar: "/images/speakers/william-elong.jpg",
+    speakerInitials: "WE",
   },
   {
-    num: "03", tag: "Masterclass", tagColor: "green",
-    title: "Steve Nouyep — Data & Cybersécurité",
-    points: ["La data au cœur de la cybersécurité","Détection de menaces par l'analyse","Anomalies et systèmes de sécurité","Cas pratiques et retours terrain"],
-    speaker: { initials: "SN", name: "Steve Nouyep", role: "Expert Data · Cybersécurité" },
-    posterSrc: "/images/events/affiche-steve-nouyep.jpg",
-    speakerSrc: null as string | null,
-    posterPath: "/images/events/affiche-steve-nouyep.jpg",
-    speakerPath: "/images/speakers/steve-nouyep.jpg",
-    tagStyle: { bg: "var(--green-light)", color: "var(--green)", border: "1px solid var(--border)" },
+    num: "03",
+    tag: "Masterclass",
+    tagClass: "event-tag",
+    title: "Steve Nouyep — Data Science & Cybersécurité",
+    subtitle: "Démonstrations avancées sur la détection des menaces par la data",
+    poster: "/images/events/affiche-steve-nouyep.jpg",
+    format: "Masterclass Technique & Démo Live",
+    points: [
+      "La data au cœur de la détection d'intrusions et des SOC modernes",
+      "Modélisation statistique et détection d'anomalies en temps réel",
+      "Sécurisation des architectures cloud et conformité réglementaire",
+      "Cas pratiques réels et retours d'expérience sur incidents majeurs",
+    ],
+    speakerName: "Steve Nouyep",
+    speakerRole: "Lead Data Analyst · Expert Cybersécurité",
+    speakerAvatar: "/images/speakers/steve-nouyep.jpg",
+    speakerInitials: "SN",
   },
 ];
 
-export default function Events() {
+export default function Events({ isHomePreview = false }: { isHomePreview?: boolean }) {
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    if (trackRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = trackRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
+    }
+  };
+
+  const scrollByAmount = (direction: "left" | "right") => {
+    if (trackRef.current) {
+      const amount = 380;
+      trackRef.current.scrollBy({
+        left: direction === "left" ? -amount : amount,
+        behavior: "smooth",
+      });
+      setTimeout(checkScroll, 320);
+    }
+  };
+
   return (
-    <section id="events" style={{ background: "var(--bg2)", padding: "7rem 0" }}>
-      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.75rem" }}>
-        <FadeUp>
-          <SecLabel>Nos initiatives</SecLabel>
-          <SecTitle>Des événements <Hl>qui transforment.</Hl></SecTitle>
-          <p style={{ color: "var(--muted)", fontSize: 16, lineHeight: 1.72, maxWidth: 520, marginTop: "0.85rem" }}>
-            Trois formats d&apos;événements impactants au service de la croissance professionnelle et du networking.
-          </p>
-        </FadeUp>
+    <section id="events">
+      <div className="ct">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16, marginBottom: "1.5rem" }}>
+          <div className="rev">
+            <div className="label">Nos initiatives</div>
+            <h2 className="sec">Des événements <span className="g">qui transforment.</span></h2>
+            <p className="desc">Trois formats complémentaires au service de l&apos;accélération professionnelle, du réseau et de l&apos;impact.</p>
+          </div>
 
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-40px" }}
-          className="ev-g"
-          style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24, marginTop: "3.5rem" }}
-        >
-          {EVENTS.map(evt => (
-            <motion.div key={evt.num} variants={fadeItem} style={{ display: "flex" }}>
-              <div style={{
-                background: "var(--card)", border: "1px solid var(--border2)",
-                borderRadius: 22, boxShadow: "var(--sh)",
-                overflow: "hidden", display: "flex", flexDirection: "column", width: "100%",
-                transition: "box-shadow .3s, border-color .3s, transform .25s",
-              }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.boxShadow = "var(--sh-lg)"; el.style.borderColor = "var(--border)"; el.style.transform = "translateY(-4px)"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.boxShadow = "var(--sh)"; el.style.borderColor = "var(--border2)"; el.style.transform = ""; }}
+          {/* Controls */}
+          <div className="rev" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span className="carousel-counter-tag">03 FORMATS D&apos;EXCELLENCE</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <button
+                type="button"
+                onClick={() => scrollByAmount("left")}
+                disabled={!canScrollLeft}
+                className="carousel-nav-btn"
+                aria-label="Format précédent"
               >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollByAmount("right")}
+                disabled={!canScrollRight}
+                className="carousel-nav-btn"
+                aria-label="Format suivant"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
 
-                {/* ── AFFICHE — zone carrée (affiches 2560×2560) ── */}
-                <div style={{ width: "100%", aspectRatio: "1/1", position: "relative", overflow: "hidden", flexShrink: 0 }}>
-                  {evt.posterSrc ? (
-                    <Image src={evt.posterSrc} alt={`Affiche ${evt.title}`} fill style={{ objectFit: "cover" }} sizes="(max-width:768px) 100vw, 380px" />
-                  ) : (
-                    <div style={{
-                      position: "absolute", inset: 0,
-                      background: "linear-gradient(145deg, var(--bg2), var(--bg3))",
-                      display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                      gap: 12, color: "var(--faint)", textAlign: "center", fontSize: 12,
-                    }}>
-                      <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(-45deg,transparent,transparent 12px,rgba(15,143,91,0.025) 12px,rgba(15,143,91,0.025) 13px)" }} />
-                      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" style={{ position: "relative", zIndex: 1, opacity: 0.4 }}>
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-                      </svg>
-                      <div style={{ position: "relative", zIndex: 1 }}>
-                        Affiche (2560×2560)<br />
-                        <code style={{ fontSize: 10, opacity: 0.6 }}>{evt.posterPath}</code>
+        {/* Carousel horizontal pour éviter la superposition excessive */}
+        <div
+          ref={trackRef}
+          onScroll={checkScroll}
+          className="events-carousel-track"
+        >
+          {EVENTS.map((e, idx) => (
+            <div key={idx} className="event-slide">
+              <div className="card event-card rev" style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <div className="event-thumb" style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
+                    <Image
+                      src={e.poster}
+                      alt={e.title}
+                      fill
+                      style={{ objectFit: "cover", transition: "transform 0.4s" }}
+                      className="hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 380px"
+                    />
+                    <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)", padding: "4px 8px", borderRadius: 6, color: "#fff", fontSize: 11, fontWeight: 700 }}>
+                      Format {e.num}
+                    </div>
+                  </div>
+
+                  <div className="event-body" style={{ position: "relative" }}>
+                    <span className="event-num-bg">{e.num}</span>
+                    <span className={e.tagClass}>{e.tag}</span>
+                    <h3 className="event-title" style={{ fontSize: 17, fontWeight: 700, marginBottom: 12 }}>
+                      {e.title}
+                    </h3>
+
+                    <ul className="event-list">
+                      {e.points.map((pt, i) => (
+                        <li key={i}>{pt}</li>
+                      ))}
+                    </ul>
+
+                    <div className="speaker-row" style={{ marginTop: 16 }}>
+                      <div className="s-avatar">
+                        {e.speakerAvatar ? (
+                          <Image
+                            src={e.speakerAvatar}
+                            alt={e.speakerName}
+                            fill
+                            style={{ objectFit: "cover" }}
+                            sizes="36px"
+                          />
+                        ) : (
+                          e.speakerInitials
+                        )}
+                      </div>
+                      <div>
+                        <div className="s-name">{e.speakerName}</div>
+                        <div className="s-role">{e.speakerRole}</div>
                       </div>
                     </div>
-                  )}
-
-                  {/* Tag overlaid on poster */}
-                  <div style={{ position: "absolute", top: 12, left: 12, zIndex: 2 }}>
-                    <span style={{
-                      ...evt.tagStyle, borderRadius: 100, padding: "3px 12px",
-                      fontSize: 11.5, fontWeight: 600,
-                      backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
-                    }}>{evt.tag}</span>
-                  </div>
-
-                  {/* Big number watermark */}
-                  <div style={{ position: "absolute", bottom: 10, right: 14, fontFamily: "var(--font-bricolage,sans-serif)", fontSize: 52, fontWeight: 900, color: "#fff", opacity: 0.13, lineHeight: 1, letterSpacing: "-4px", userSelect: "none" }}>
-                    {evt.num}
                   </div>
                 </div>
 
-                {/* ── BODY ── */}
-                <div style={{ padding: "1.6rem", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <h3 style={{ fontFamily: "var(--font-bricolage,sans-serif)", fontSize: 18, fontWeight: 700, color: "var(--text)", lineHeight: 1.25, marginBottom: "1.1rem", letterSpacing: "-0.02em" }}>
-                    {evt.title}
-                  </h3>
-
-                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 9, marginBottom: "1.4rem", flex: 1 }}>
-                    {evt.points.map(p => (
-                      <li key={p} style={{ fontSize: 13.5, color: "var(--muted)", paddingLeft: 18, position: "relative", lineHeight: 1.55 }}>
-                        <span style={{ position: "absolute", left: 0, color: "var(--green)", fontWeight: 600, fontSize: 12 }}>→</span>
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* ── SPEAKER ── */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: "1.1rem", borderTop: "1px solid var(--border2)", marginTop: "auto" }}>
-                    {/* Speaker photo */}
-                    <div style={{ width: 44, height: 44, borderRadius: "50%", overflow: "hidden", border: "2px solid var(--border)", position: "relative", flexShrink: 0, background: "var(--green-light)" }}>
-                      {evt.speakerSrc ? (
-                        <Image src={evt.speakerSrc} alt={evt.speaker.name} fill style={{ objectFit: "cover" }} sizes="44px" />
-                      ) : (
-                        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-bricolage,sans-serif)", fontWeight: 800, fontSize: 14, color: "var(--green)" }}>
-                          {evt.speaker.initials}
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)", lineHeight: 1.2 }}>{evt.speaker.name}</div>
-                      <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>{evt.speaker.role}</div>
-                    </div>
-                  </div>
+                {/* Bouton d'action interactif */}
+                <div style={{ padding: "0 1.5rem 1.5rem" }}>
+                  <button
+                    onClick={() => setSelectedEvent(e)}
+                    className="btn btn-o"
+                    style={{ width: "100%", justifyContent: "center", fontSize: 13, padding: "0.55rem 1rem" }}
+                  >
+                    Découvrir les détails &amp; S&apos;inscrire <ArrowRight size={14} />
+                  </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
+
+        {isHomePreview && (
+          <div className="rev" style={{ textAlign: "center", marginTop: "2.75rem" }}>
+            <Link
+              href="/evenements"
+              className="btn btn-o"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
+            >
+              Voir le détail complet des événements &amp; s&apos;inscrire <ArrowRight size={15} />
+            </Link>
+          </div>
+        )}
       </div>
-      <style>{`
-        .ev-g { grid-template-columns: repeat(3,1fr) !important; }
-        @media(max-width:900px){ .ev-g { grid-template-columns: 1fr !important; } }
-      `}</style>
+
+      {/* Modal interactif détails événement */}
+      {selectedEvent && (
+        <div
+          onClick={() => setSelectedEvent(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.85)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 24,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="card"
+            style={{
+              maxWidth: 720,
+              width: "100%",
+              background: "var(--card)",
+              overflow: "hidden",
+              position: "relative",
+              maxHeight: "90vh",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid var(--border2)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span className={selectedEvent.tagClass} style={{ margin: 0 }}>
+                  {selectedEvent.tag}
+                </span>
+                <span style={{ fontSize: 13, color: "var(--muted)" }}>· Format officiel</span>
+              </div>
+              <button
+                onClick={() => setSelectedEvent(null)}
+                style={{ background: "transparent", border: "none", color: "var(--muted)", cursor: "pointer", display: "flex", alignItems: "center" }}
+                aria-label="Fermer"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div style={{ overflowY: "auto", padding: "1.5rem" }}>
+              <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden", marginBottom: 20 }}>
+                <Image
+                  src={selectedEvent.poster}
+                  alt={selectedEvent.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="700px"
+                />
+              </div>
+
+              <h3 style={{ fontFamily: "var(--display)", fontSize: 22, fontWeight: 800, color: "var(--text)", marginBottom: 6 }}>
+                {selectedEvent.title}
+              </h3>
+              <p style={{ fontSize: 14, color: "var(--green)", fontWeight: 600, marginBottom: 16 }}>
+                {selectedEvent.subtitle}
+              </p>
+
+              <div style={{ background: "var(--bg2)", padding: "1rem 1.25rem", borderRadius: 8, marginBottom: 20 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", color: "var(--muted)", letterSpacing: "0.5px", marginBottom: 4 }}>
+                  Format de la session
+                </div>
+                <div style={{ fontSize: 14, color: "var(--text)", fontWeight: 500 }}>
+                  {selectedEvent.format}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase", color: "var(--text)", letterSpacing: "0.5px", marginBottom: 10 }}>
+                  Programme &amp; Enseignements clés
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {selectedEvent.points.map((pt, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, color: "var(--muted)" }}>
+                      <Check size={16} style={{ color: "var(--green)", flexShrink: 0, marginTop: 2 }} />
+                      <span>{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Intervenant */}
+              <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "1rem", background: "var(--bg2)", borderRadius: 10 }}>
+                <div className="s-avatar" style={{ width: 44, height: 44 }}>
+                  {selectedEvent.speakerAvatar ? (
+                    <Image src={selectedEvent.speakerAvatar} alt={selectedEvent.speakerName} fill style={{ objectFit: "cover" }} sizes="44px" />
+                  ) : (
+                    selectedEvent.speakerInitials
+                  )}
+                </div>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text)" }}>{selectedEvent.speakerName}</div>
+                  <div style={{ fontSize: 12.5, color: "var(--muted)" }}>{selectedEvent.speakerRole}</div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid var(--border2)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+              <button onClick={() => setSelectedEvent(null)} className="btn btn-o" style={{ fontSize: 13 }}>
+                Fermer
+              </button>
+              <a
+                href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setSelectedEvent(null)}
+                className="btn btn-p"
+                style={{ fontSize: 13 }}
+              >
+                Participer à la prochaine édition <ArrowRight size={14} />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

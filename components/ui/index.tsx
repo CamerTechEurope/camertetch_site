@@ -1,6 +1,6 @@
 "use client";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* ── Fade in up (scroll-triggered) ── */
 export function FadeUp({
@@ -204,7 +204,23 @@ export function ImgPh({
 
 /* ── Counter hook ── */
 export function useCounter(target: number, started: boolean, delay = 0) {
-  const [value, setValue] = useRef(0).current ? [0, () => {}] : [0, () => {}];
+  const [value, setValue] = useState(0);
+  const ran = useRef(false);
+  useEffect(() => {
+    if (!started || ran.current) return;
+    ran.current = true;
+    const timer = setTimeout(() => {
+      const t0 = performance.now();
+      const dur = 1700;
+      const tick = (now: number) => {
+        const p = Math.min((now - t0) / dur, 1);
+        setValue(Math.round((1 - Math.pow(2, -10 * p)) * target));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [started, target, delay]);
   return value;
 }
 
