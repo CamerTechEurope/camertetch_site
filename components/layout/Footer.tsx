@@ -128,7 +128,6 @@ export default function Footer() {
               <li><Link href="/evenements">Événements &amp; Formats</Link></li>
               <li><Link href="/camertech-connect">CamerTech Connect (CTC)</Link></li>
               <li><Link href="/media">Médiathèque &amp; Affiches</Link></li>
-              <li><Link href="/#faq">Questions fréquentes (FAQ)</Link></li>
               <li><Link href="/linkedin">Activité LinkedIn</Link></li>
             </ul>
           </div>

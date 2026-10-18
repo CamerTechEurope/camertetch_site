@@ -5,7 +5,6 @@ import Events from "@/components/sections/Events";
 import Partners from "@/components/sections/Partners";
 import Community from "@/components/sections/Community";
 import Media from "@/components/sections/Media";
-import FAQ from "@/components/sections/FAQ";
 import CtaFinal from "@/components/sections/CtaFinal";
 
 export default function HomePage() {
@@ -18,7 +17,6 @@ export default function HomePage() {
       <Partners isHomePreview />
       <Community isHomePreview />
       <Media isHomePreview />
-      <FAQ />
       <CtaFinal />
     </>
   );
