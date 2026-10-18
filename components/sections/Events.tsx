@@ -17,11 +17,34 @@ interface EventItem {
   speakerAvatar: string | null;
   speakerInitials: string;
   format: string;
+  detailUrl?: string;
+  reserveUrl?: string;
 }
 
 const EVENTS: EventItem[] = [
   {
     num: "01",
+    tag: "Intégration",
+    tagClass: "event-tag",
+    title: "Back to School 2026 — Paris & Lyon",
+    subtitle: "Bienvenue en France ! Balade urbaine, rencontres, bons plans & bowling",
+    poster: "/images/events/affiche-back-to-school.jpg",
+    format: "Balade découverte gratuite · Bowling convivial en option",
+    points: [
+      "Samedi 24 Octobre 2026 en simultané à Paris et à Lyon",
+      "Balade pour découvrir la ville et repérer ses repères d'installation",
+      "Échanges avec la communauté tech et partage de bons plans pratiques",
+      "Session bowling en option pour prolonger le moment en toute convivialité",
+    ],
+    speakerName: "Camer'Tech Europe & Cam Wonders",
+    speakerRole: "Accueil · Réseau · Intégration Paris & Lyon",
+    speakerAvatar: null,
+    speakerInitials: "BTS",
+    detailUrl: "/evenements/back-to-school",
+    reserveUrl: "https://linktr.ee/CamerTechEurope",
+  },
+  {
+    num: "02",
     tag: "Carrière",
     tagClass: "event-tag",
     title: "Réussir ses entretiens en ESN & Grands Groupes",
@@ -40,7 +63,7 @@ const EVENTS: EventItem[] = [
     speakerInitials: "CT",
   },
   {
-    num: "02",
+    num: "03",
     tag: "Inspiration",
     tagClass: "event-tag y",
     title: "William Elong Live — De Yaoundé à Forbes Top 30",
@@ -59,7 +82,7 @@ const EVENTS: EventItem[] = [
     speakerInitials: "WE",
   },
   {
-    num: "03",
+    num: "04",
     tag: "Masterclass",
     tagClass: "event-tag",
     title: "Steve Nouyep — Data Science & Cybersécurité",
@@ -329,19 +352,31 @@ export default function Events({ isHomePreview = false }: { isHomePreview?: bool
               </div>
             </div>
 
-            <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid var(--border2)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
-              <button onClick={() => setSelectedEvent(null)} className="btn btn-o" style={{ fontSize: 13 }}>
-                Fermer
-              </button>
+            <div style={{ padding: "1.25rem 1.5rem", borderTop: "1px solid var(--border2)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <button onClick={() => setSelectedEvent(null)} className="btn btn-o" style={{ fontSize: 13 }}>
+                  Fermer
+                </button>
+                {selectedEvent.detailUrl && (
+                  <Link
+                    href={selectedEvent.detailUrl}
+                    onClick={() => setSelectedEvent(null)}
+                    className="btn btn-o"
+                    style={{ fontSize: 13 }}
+                  >
+                    Voir la page détaillée
+                  </Link>
+                )}
+              </div>
               <a
-                href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"
+                href={selectedEvent.reserveUrl || "https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"}
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => setSelectedEvent(null)}
                 className="btn btn-p"
                 style={{ fontSize: 13 }}
               >
-                Participer à la prochaine édition <ArrowRight size={14} />
+                {selectedEvent.reserveUrl ? "Réserver sur Linktree" : "Participer à la prochaine édition"} <ArrowRight size={14} />
               </a>
             </div>
           </div>

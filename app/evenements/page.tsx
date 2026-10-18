@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Events from "@/components/sections/Events";
-import { ArrowLeft, ArrowRight, MessageCircle, Sparkles, MapPin, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, MessageCircle, Sparkles, MapPin, Users, Calendar, ExternalLink, Ticket } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Événements & Formats d'Excellence — Camer'Tech Europe",
   description:
-    "Participez aux masterclasses, panels de haut niveau, sessions de coaching carrière et au grand rendez-vous annuel CamerTech Connect (CTC) à Paris.",
+    "Découvrez les événements de Camer'Tech Europe : Back to School 2026 à Paris et Lyon, CamerTech Connect (CTC) et nos masterclasses d'élite.",
   openGraph: {
     title: "Événements & Formats d'Excellence — Camer'Tech Europe",
     description:
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function EvenementsPage() {
   return (
     <div style={{ paddingTop: "5rem" }}>
-      {/* En-tête de navigation & sous-onglets Événements */}
+      {/* En-tête de navigation & sous-navigation rapide */}
       <div className="ct" style={{ padding: "1.5rem 2rem 0" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, marginBottom: "1.5rem" }}>
           <Link
@@ -29,65 +29,116 @@ export default function EvenementsPage() {
             <ArrowLeft size={15} /> Retour à l&apos;accueil
           </Link>
 
-          {/* Sous-navigation interne Événements */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--bg2)", padding: "4px 8px", borderRadius: 100, border: "1px solid var(--border2)" }}>
-            <span style={{ fontSize: 13, fontWeight: 700, padding: "6px 14px", borderRadius: 100, background: "var(--card)", color: "var(--green)", boxShadow: "var(--shadow)" }}>
-              Formats réguliers
-            </span>
+          {/* Sélecteur de sous-pages d'événements */}
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "var(--bg2)", padding: "4px 8px", borderRadius: 100, border: "1px solid var(--border2)", flexWrap: "wrap" }}>
+            <Link
+              href="/evenements/back-to-school"
+              style={{ fontSize: 12.5, fontWeight: 700, padding: "6px 14px", borderRadius: 100, background: "var(--card)", color: "var(--green)", textDecoration: "none", boxShadow: "var(--shadow)" }}
+            >
+              🎒 Back to School 2026
+            </Link>
             <Link
               href="/camertech-connect"
-              style={{ fontSize: 13, fontWeight: 600, padding: "6px 14px", borderRadius: 100, color: "var(--muted)", textDecoration: "none", transition: "color 0.2s" }}
+              style={{ fontSize: 12.5, fontWeight: 600, padding: "6px 14px", borderRadius: 100, color: "var(--muted)", textDecoration: "none", transition: "color 0.2s" }}
               className="hover:text-green-600"
             >
-              Événement phare CTC ↗
+              🌟 CamerTech Connect (CTC)
             </Link>
           </div>
         </div>
 
-        {/* Focus Banner CamerTech Connect (CTC) intégré comme sous-page majeure */}
-        <div
-          className="card rev"
-          style={{
-            padding: "2rem 2.25rem",
-            background: "linear-gradient(135deg, var(--card) 0%, rgba(10, 155, 94, 0.08) 100%)",
-            border: "1px solid rgba(10, 155, 94, 0.25)",
-            marginBottom: "2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "1.5rem",
-          }}
-        >
-          <div style={{ maxWidth: 620 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--green)", background: "rgba(10, 155, 94, 0.12)", padding: "4px 10px", borderRadius: 6, marginBottom: 10 }}>
-              <Sparkles size={14} /> Grand rendez-vous annuel
+        {/* Grille des 2 événements phares : Back to School & CTC */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20, marginBottom: "2.5rem" }}>
+          {/* Carte 1 : Back to School 2026 */}
+          <div
+            className="card rev"
+            style={{
+              padding: "1.75rem 2rem",
+              background: "linear-gradient(135deg, var(--card) 0%, rgba(245, 166, 35, 0.08) 100%)",
+              border: "1px solid rgba(245, 166, 35, 0.3)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--yellow)", background: "rgba(245, 166, 35, 0.12)", padding: "3px 8px", borderRadius: 6, marginBottom: 10 }}>
+                <Calendar size={13} /> Prochain événement · 24 Octobre 2026
+              </div>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "1.5rem", fontWeight: 800, margin: "0 0 6px", color: "var(--text)" }}>
+                Back to School <span style={{ color: "var(--yellow)" }}>2026</span>
+              </h2>
+              <p style={{ color: "var(--muted)", fontSize: 13.5, lineHeight: 1.55, margin: "0 0 14px" }}>
+                Bienvenue en France ! Balade urbaine découverte, partage de bons plans, networking et soirée bowling conviviale en simultané à <strong>Paris</strong> et à <strong>Lyon</strong>.
+              </p>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", fontSize: 12, color: "var(--text)", marginBottom: 16 }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><MapPin size={13} style={{ color: "var(--red)" }} /> Paris &amp; Lyon</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><Ticket size={13} style={{ color: "var(--green)" }} /> Balade gratuite · Bowling option</span>
+              </div>
             </div>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(1.5rem, 3vw, 2.2rem)", fontWeight: 800, margin: "0 0 8px", color: "var(--text)" }}>
-              Camer<span className="g">Tech</span> Connect (CTC)
-            </h2>
-            <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.6, margin: 0 }}>
-              L&apos;événement phare rassemblant plus de 150 professionnels, speakers d&apos;élite, investisseurs et recruteurs pour célébrer l&apos;excellence tech camerounaise à Paris.
-            </p>
-            <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", marginTop: "1rem", fontSize: 13, color: "var(--text)" }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><MapPin size={15} style={{ color: "var(--red)" }} /> Paris · Hub d&apos;excellence</span>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><Users size={15} style={{ color: "var(--green)" }} /> 150+ participants réunis</span>
+
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <Link
+                href="/evenements/back-to-school"
+                className="btn btn-p"
+                style={{ fontSize: 12.5, padding: "0.5rem 1rem" }}
+              >
+                Détails du programme <ArrowRight size={13} />
+              </Link>
+              <a
+                href="https://linktr.ee/CamerTechEurope"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-o"
+                style={{ fontSize: 12.5, padding: "0.5rem 1rem" }}
+              >
+                Réserver ma place <ExternalLink size={13} />
+              </a>
             </div>
           </div>
 
-          <div>
-            <Link
-              href="/camertech-connect"
-              className="btn btn-p"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14, padding: "0.75rem 1.4rem" }}
-            >
-              Explorer la page dédiée CTC <ArrowRight size={15} />
-            </Link>
+          {/* Carte 2 : CamerTech Connect */}
+          <div
+            className="card rev"
+            style={{
+              padding: "1.75rem 2rem",
+              background: "linear-gradient(135deg, var(--card) 0%, rgba(10, 155, 94, 0.08) 100%)",
+              border: "1px solid rgba(10, 155, 94, 0.3)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--green)", background: "rgba(10, 155, 94, 0.12)", padding: "3px 8px", borderRadius: 6, marginBottom: 10 }}>
+                <Sparkles size={13} /> Sommet Annuel de Référence
+              </div>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "1.5rem", fontWeight: 800, margin: "0 0 6px", color: "var(--text)" }}>
+                Camer<span className="g">Tech</span> Connect (CTC)
+              </h2>
+              <p style={{ color: "var(--muted)", fontSize: 13.5, lineHeight: 1.55, margin: "0 0 14px" }}>
+                La grande convention annuelle de la diaspora tech camerounaise à Paris. Plus de 150 participants, keynotes prestigieuses, ateliers carrière et accords stratégiques.
+              </p>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", fontSize: 12, color: "var(--text)", marginBottom: 16 }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><MapPin size={13} style={{ color: "var(--red)" }} /> Paris · Hub d&apos;excellence</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}><Users size={13} style={{ color: "var(--green)" }} /> 150+ participants</span>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <Link
+                href="/camertech-connect"
+                className="btn btn-p"
+                style={{ fontSize: 12.5, padding: "0.5rem 1rem" }}
+              >
+                Explorer l&apos;édition CTC &amp; Galerie <ArrowRight size={13} />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Formats réguliers de masterclasses et workshops */}
+      {/* Tous les formats d'événements */}
       <Events />
 
       {/* Appel pour proposer une intervention */}

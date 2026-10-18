@@ -19,6 +19,17 @@ interface MediaItem {
 
 const MEDIA_ITEMS: MediaItem[] = [
   {
+    id: "back-to-school-affiche",
+    type: "affiche",
+    label: "Affiche Officielle",
+    labelColor: "var(--yellow)",
+    title: "Back to School 2026 — Paris & Lyon (24 Octobre)",
+    description: "Affiche officielle de la journée d'accueil et d'intégration pour les nouveaux arrivants en France. Balade urbaine, rencontres, bons plans et bowling en option.",
+    image: "/images/events/affiche-back-to-school.jpg",
+    isVideo: false,
+    link: "https://linktr.ee/CamerTechEurope",
+  },
+  {
     id: "ctc-affiche",
     type: "affiche",
     label: "Affiche Officielle",
