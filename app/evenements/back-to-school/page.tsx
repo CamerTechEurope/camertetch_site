@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ExternalLink, Calendar, MapPin, Ticket, Phone, Sparkles } from "lucide-react";
+import { ArrowLeft, ExternalLink, Calendar, MapPin, Ticket, Phone, Sparkles, Compass, Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Back to School 2026 (Paris & Lyon) — Camer'Tech Europe",
@@ -36,19 +36,19 @@ export default function BackToSchoolPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
             <div className="rev">
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px", borderRadius: 100, background: "rgba(10, 155, 94, 0.12)", color: "var(--green)", fontSize: 12.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "1rem" }}>
-                <Sparkles size={14} /> Événement d&apos;intégration 2026
+                <Sparkles size={14} /> Événement d&apos;accueil et d&apos;intégration
               </div>
 
               <h1 style={{ fontFamily: "var(--display)", fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)", fontWeight: 800, lineHeight: 1.15, marginBottom: "1rem", color: "var(--text)" }}>
                 Back to School <span className="g">Camer&apos;Tech</span>
               </h1>
 
-              <p style={{ fontSize: "clamp(1.1rem, 2vw, 1.3rem)", fontWeight: 700, color: "var(--yellow)", marginBottom: "1.25rem" }}>
-                Bienvenue en France ! 🇫🇷 Nouveau pays, nouvelle ville, nouveaux repères… et bientôt de nouvelles rencontres !
+              <p style={{ fontSize: "clamp(1.05rem, 1.8vw, 1.25rem)", fontWeight: 700, color: "var(--yellow)", marginBottom: "1.25rem", lineHeight: 1.4 }}>
+                Bienvenue en France ! Nouveau pays, nouvelle ville, nouveaux repères… et bientôt de nouvelles rencontres !
               </p>
 
-              <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--muted)", marginBottom: "2rem" }}>
-                Tu viens d&apos;arriver en France pour tes études ou ton premier job ? Tu es déjà installé et tu souhaites élargir ton réseau professionnel et amical ? Rejoins la plus bienveillante des communautés tech le <strong>samedi 24 octobre 2026</strong> en simultané à <strong>Paris</strong> et à <strong>Lyon</strong> !
+              <p style={{ fontSize: 15.5, lineHeight: 1.7, color: "var(--muted)", marginBottom: "2rem" }}>
+                Tu viens d&apos;arriver en France pour tes études ou ton premier job ? Tu es déjà installé et tu souhaites élargir ton réseau professionnel et amical ? Rejoins la communauté Camer&apos;Tech Europe le <strong>samedi 24 octobre 2026</strong> en simultané à <strong>Paris</strong> et à <strong>Lyon</strong>.
               </p>
 
               {/* Badges pratiques */}
@@ -85,7 +85,7 @@ export default function BackToSchoolPage() {
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-p"
-                  style={{ fontSize: 15, padding: "0.85rem 1.6rem", display: "inline-flex", alignItems: "center", gap: 8 }}
+                  style={{ fontSize: 14.5, padding: "0.85rem 1.6rem", display: "inline-flex", alignItems: "center", gap: 8 }}
                 >
                   Choisir ma ville et réserver ma place <ExternalLink size={16} />
                 </a>
@@ -112,7 +112,7 @@ export default function BackToSchoolPage() {
                   boxShadow: "var(--shadow-lg)",
                   border: "1px solid var(--border)",
                   aspectRatio: "3/4",
-                  maxHeight: "560px",
+                  maxHeight: "540px",
                   margin: "0 auto",
                 }}
               >
@@ -174,7 +174,9 @@ export default function BackToSchoolPage() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
             <div className="card rev" style={{ padding: "1.75rem" }}>
-              <div style={{ fontSize: 32, marginBottom: "1rem" }}>🚶</div>
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(10, 155, 94, 0.12)", color: "var(--green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
+                <MapPin size={22} />
+              </div>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: "0.5rem", color: "var(--text)" }}>
                 1. Balade urbaine découverte
               </h3>
@@ -187,12 +189,14 @@ export default function BackToSchoolPage() {
             </div>
 
             <div className="card rev" style={{ padding: "1.75rem" }}>
-              <div style={{ fontSize: 32, marginBottom: "1rem" }}>💡</div>
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(245, 166, 35, 0.12)", color: "var(--yellow)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
+                <Compass size={22} />
+              </div>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: "0.5rem", color: "var(--text)" }}>
                 2. Partage de bons plans
               </h3>
               <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6 }}>
-                Conseils pratiques indispensables : transports, démarches administratives, recherche de logement, astuces étudiantes et pièges à éviter.
+                Conseils pratiques indispensables : transports, démarches administratives, recherche de logement, astuces étudiantes et repères essentiels.
               </p>
               <div style={{ marginTop: "1rem", fontSize: 12.5, fontWeight: 700, color: "var(--yellow)" }}>
                 Retours d&apos;expérience réels
@@ -200,7 +204,9 @@ export default function BackToSchoolPage() {
             </div>
 
             <div className="card rev" style={{ padding: "1.75rem" }}>
-              <div style={{ fontSize: 32, marginBottom: "1rem" }}>🤝</div>
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(10, 155, 94, 0.12)", color: "var(--green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
+                <Users size={22} />
+              </div>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: "0.5rem", color: "var(--text)" }}>
                 3. Networking &amp; Parrainage
               </h3>
@@ -213,12 +219,14 @@ export default function BackToSchoolPage() {
             </div>
 
             <div className="card rev" style={{ padding: "1.75rem" }}>
-              <div style={{ fontSize: 32, marginBottom: "1rem" }}>🎳</div>
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(224, 43, 32, 0.12)", color: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
+                <Ticket size={22} />
+              </div>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: "0.5rem", color: "var(--text)" }}>
                 4. Soirée Bowling en option
               </h3>
               <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6 }}>
-                Pour ceux qui souhaitent prolonger le plaisir, session de bowling festive avec musique et défis amicaux pour finir la journée en beauté.
+                Pour ceux qui souhaitent prolonger le moment, session de bowling festive avec musique et défis amicaux pour finir la journée en beauté.
               </p>
               <div style={{ marginTop: "1rem", fontSize: 12.5, fontWeight: 700, color: "var(--red)" }}>
                 Option avec billet payant
@@ -265,7 +273,7 @@ export default function BackToSchoolPage() {
 
             <div style={{ borderTop: "1px solid var(--border2)", paddingTop: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
               <p style={{ fontSize: 14, color: "var(--muted)", margin: 0 }}>
-                Viens seul ou avec des amis, l&apos;objectif est justement de faire de nouvelles rencontres ! 🤝
+                Viens seul ou avec des amis : l&apos;objectif est d&apos;accueillir et d&apos;élargir le cercle professionnel et amical !
               </p>
               <a
                 href="https://linktr.ee/CamerTechEurope"

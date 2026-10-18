@@ -35,14 +35,14 @@ export default function EvenementsPage() {
               href="/evenements/back-to-school"
               style={{ fontSize: 12.5, fontWeight: 700, padding: "6px 14px", borderRadius: 100, background: "var(--card)", color: "var(--green)", textDecoration: "none", boxShadow: "var(--shadow)" }}
             >
-              🎒 Back to School 2026
+              Back to School 2026
             </Link>
             <Link
               href="/camertech-connect"
               style={{ fontSize: 12.5, fontWeight: 600, padding: "6px 14px", borderRadius: 100, color: "var(--muted)", textDecoration: "none", transition: "color 0.2s" }}
               className="hover:text-green-600"
             >
-              🌟 CamerTech Connect (CTC)
+              CamerTech Connect (CTC)
             </Link>
           </div>
         </div>

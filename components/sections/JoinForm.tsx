@@ -185,7 +185,7 @@ export default function JoinForm() {
                 disabled={status === "loading"}
               >
                 {status === "loading" && "Envoi en cours…"}
-                {status === "success" && "✓ Candidature envoyée ! Redirection WhatsApp..."}
+                {status === "success" && "Candidature validée ! Redirection WhatsApp..."}
                 {status === "idle" && "Envoyer ma candidature"}
               </button>
             </form>

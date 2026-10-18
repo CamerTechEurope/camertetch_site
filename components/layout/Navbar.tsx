@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "@/components/layout/ThemeProvider";
-import { Sun, Moon, Menu, X, ChevronDown, Calendar, Sparkles, Users, Building2, Film, Compass, Target, Zap } from "lucide-react";
+import { Sun, Moon, Menu, X, ChevronDown, Calendar, Sparkles, Users, Building2, Film, Compass, Target, Zap, GraduationCap } from "lucide-react";
 
 export default function Navbar() {
   const { theme, toggle } = useTheme();
@@ -213,7 +213,7 @@ export default function Navbar() {
                     className="flex items-start gap-2.5 p-2 rounded-lg transition-colors hover:bg-[var(--bg2)] text-left"
                     style={{ borderLeft: "2px solid var(--yellow)", background: "rgba(245, 166, 35, 0.05)" }}
                   >
-                    <span className="text-base leading-none mt-0.5">🎒</span>
+                    <GraduationCap size={17} style={{ color: "var(--yellow)", marginTop: 2, flexShrink: 0 }} />
                     <div>
                       <div className="text-[13px] font-bold text-[var(--text)] flex items-center gap-1.5">
                         Back to School 2026
@@ -221,7 +221,7 @@ export default function Navbar() {
                           24 Oct.
                         </span>
                       </div>
-                      <div className="text-[11.5px] text-[var(--muted)]">Paris &amp; Lyon · Balade &amp; Bowling</div>
+                      <div className="text-[11.5px] text-[var(--muted)]">Paris &amp; Lyon · Intégration &amp; Réseau</div>
                     </div>
                   </Link>
 
@@ -405,10 +405,10 @@ export default function Navbar() {
               Tous les événements
             </Link>
             <Link href="/evenements/back-to-school" onClick={closeAll} style={{ paddingLeft: 16, color: "var(--yellow)", fontWeight: 600 }}>
-              🎒 Back to School 2026 (Paris &amp; Lyon)
+              Back to School 2026 (Paris &amp; Lyon)
             </Link>
             <Link href="/camertech-connect" onClick={closeAll} style={{ paddingLeft: 16, color: "var(--green)", fontWeight: 600 }}>
-              🌟 CamerTech Connect (CTC)
+              CamerTech Connect (CTC)
             </Link>
           </div>
 

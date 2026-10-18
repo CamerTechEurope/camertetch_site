@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check, Globe, ThumbsUp } from "lucide-react";
 
 type Category = "all" | "events" | "jobs" | "tech";
 
@@ -37,7 +37,7 @@ const POSTS: Post[] = [
     authorHandle: "@camertecheurope",
     timeAgo: "Il y a 3 jours",
     content:
-      "🔥 Les préparatifs de la prochaine édition de CamerTech Connect (CTC) avancent à grand pas ! Rejoignez plus de 150 professionnels, entrepreneurs et ingénieurs à Paris. Au programme : panels exclusifs sur l'intelligence artificielle, la cybersécurité, retours d'expérience et sessions de mentorat individuel.",
+      "Les préparatifs de la prochaine édition de CamerTech Connect (CTC) avancent à grand pas ! Rejoignez plus de 150 professionnels, entrepreneurs et ingénieurs à Paris. Au programme : panels exclusifs sur l'intelligence artificielle, la cybersécurité, retours d'expérience et sessions de mentorat individuel.",
     tags: ["#CamerTechConnect", "#TechDiaspora", "#NetworkingParis", "#TechAfricaine"],
     image: "/images/connect/hero-galerie.jpg",
     aspectRatio: "16/9",
@@ -59,7 +59,7 @@ const POSTS: Post[] = [
     authorHandle: "@camertecheurope",
     timeAgo: "Il y a 1 semaine",
     content:
-      "💡 Replay de la masterclass exceptionnelle avec William Elong (Forbes Top 30 Africa) ! 'Entreprendre dans la tech de pointe, lever des fonds et bâtir des projets panafricains à fort impact'. Un échange sans filtre et riche en enseignements concrets pour toute la diaspora.",
+      "Replay de la masterclass exceptionnelle avec William Elong (Forbes Top 30 Africa) ! 'Entreprendre dans la tech de pointe, lever des fonds et bâtir des projets panafricains à fort impact'. Un échange sans filtre et riche en enseignements concrets pour toute la diaspora.",
     tags: ["#InnovationTech", "#StartupAfrica", "#Forbes30", "#MasterclassTech"],
     image: "/images/events/affiche-william-elong.jpg",
     aspectRatio: "1/1",
@@ -81,7 +81,7 @@ const POSTS: Post[] = [
     authorHandle: "@camertecheurope",
     timeAgo: "Il y a 2 semaines",
     content:
-      "🚀 Nouvelles opportunités partagées au sein du réseau Camer'Tech Europe ! Trois entreprises partenaires recrutent activement ce mois-ci : Lead DataOps (Paris/Hybride), DevOps Cloud AWS (Bruxelles/Remote), et Ingénieur Cybersécurité (Île-de-France). Membres de la communauté, consultez les offres en avant-première.",
+      "Nouvelles opportunités partagées au sein du réseau Camer'Tech Europe ! Trois entreprises partenaires recrutent activement ce mois-ci : Lead DataOps (Paris/Hybride), DevOps Cloud AWS (Bruxelles/Remote), et Ingénieur Cybersécurité (Île-de-France). Membres de la communauté, consultez les offres en avant-première.",
     tags: ["#RecrutementTech", "#OpportunitésEmploi", "#DataOps", "#CloudAWS", "#Cyber"],
     image: "/images/events/camertech.jpg",
     aspectRatio: "16/9",
@@ -103,7 +103,7 @@ const POSTS: Post[] = [
     authorHandle: "@camertecheurope",
     timeAgo: "Il y a 3 semaines",
     content:
-      "🛡️ 'La Data au service de la Cybersécurité' : retour sur l'intervention de Steve Nouyep. Analyse des menaces complexes, détection d'anomalies à grande échelle et cas pratiques d'entreprises du CAC 40. Merci aux 90 participants connectés en direct !",
+      "'La Data au service de la Cybersécurité' : retour sur l'intervention de Steve Nouyep. Analyse des menaces complexes, détection d'anomalies à grande échelle et cas pratiques d'entreprises du CAC 40. Merci aux 90 participants connectés en direct !",
     tags: ["#Cyberdefense", "#BigData", "#ThreatDetection", "#SecOps"],
     image: "/images/events/affiche-steve-nouyep.jpg",
     aspectRatio: "1/1",
@@ -216,7 +216,7 @@ export default function LinkedInFeed() {
             gap: 10,
           }}
         >
-          <span style={{ color: "var(--green)" }}>✓</span>
+          <Check size={16} style={{ color: "var(--green)" }} />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -380,7 +380,7 @@ export default function LinkedInFeed() {
                       <span>·</span>
                       <span>{post.timeAgo}</span>
                       <span>·</span>
-                      <span>🌐</span>
+                      <Globe size={11} style={{ color: "var(--muted)" }} />
                     </div>
                   </div>
 
@@ -462,8 +462,10 @@ export default function LinkedInFeed() {
                     marginBottom: "0.75rem",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                    <span style={{ fontSize: 14 }}>👍💡👏</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 18, height: 18, borderRadius: "50%", background: "#0A66C2", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                      <ThumbsUp size={10} color="#fff" fill="#fff" />
+                    </span>
                     <span>{currentLikes} réactions</span>
                   </div>
                   <div>
