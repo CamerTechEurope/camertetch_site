@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -21,7 +22,7 @@ export default function Hero() {
 
             <div className="hero-ctas">
               <a href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0" target="_blank" rel="noreferrer" className="btn btn-p">Rejoindre la communauté</a>
-              <a href="#ecosysteme" className="btn btn-o">Explorer l&apos;écosystème ↓</a>
+              <Link href="/evenements" className="btn btn-o">Explorer les événements</Link>
             </div>
 
             {/* Social proof avatar stack */}

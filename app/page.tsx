@@ -1,16 +1,22 @@
 import Hero from "@/components/sections/Hero";
-import Stats from "@/components/sections/Stats";
-import EcosystemHub from "@/components/sections/EcosystemHub";
+import Mission from "@/components/sections/Mission";
+import CamertechConnect from "@/components/sections/CamertechConnect";
+import Events from "@/components/sections/Events";
 import Partners from "@/components/sections/Partners";
+import Community from "@/components/sections/Community";
+import Media from "@/components/sections/Media";
 import CtaFinal from "@/components/sections/CtaFinal";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Stats />
-      <EcosystemHub />
+      <Mission isHomePreview />
+      <CamertechConnect isHomePreview />
+      <Events isHomePreview />
       <Partners isHomePreview />
+      <Community isHomePreview />
+      <Media isHomePreview />
       <CtaFinal />
     </>
   );

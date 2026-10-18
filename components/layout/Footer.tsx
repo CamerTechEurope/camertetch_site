@@ -124,11 +124,11 @@ export default function Footer() {
             <div className="f-col-title">Navigation</div>
             <ul className="f-links">
               <li><Link href="/">Accueil</Link></li>
-              <li><Link href="/mission">Mission &amp; Vision</Link></li>
-              <li><Link href="/evenements">Événements &amp; Formats</Link></li>
-              <li><Link href="/camertech-connect">CamerTech Connect (CTC)</Link></li>
-              <li><Link href="/media">Médiathèque &amp; Affiches</Link></li>
-              <li><Link href="/linkedin">Activité LinkedIn</Link></li>
+              <li><Link href="/about">À propos &amp; Mission</Link></li>
+              <li><Link href="/evenements">Événements (dont CTC)</Link></li>
+              <li><Link href="/communaute">Communauté des Talents</Link></li>
+              <li><Link href="/partenaires">Partenaires</Link></li>
+              <li><Link href="/media">Médiathèque &amp; Actualités</Link></li>
             </ul>
           </div>
 

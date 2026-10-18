@@ -98,11 +98,11 @@ export default function Mission({ isHomePreview = false }: MissionProps) {
         {isHomePreview && (
           <div style={{ textAlign: "center", marginTop: "2.75rem" }} className="rev">
             <Link
-              href="/mission"
+              href="/about"
               className="btn btn-o"
               style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
             >
-              Découvrir les 6 piliers et notre vision complète <ArrowRight size={15} />
+              Découvrir l&apos;histoire, nos 6 piliers et notre vision complète <ArrowRight size={15} />
             </Link>
           </div>
         )}

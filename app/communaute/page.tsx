@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Community from "@/components/sections/Community";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import { MessageCircle } from "lucide-react";
+import { ArrowLeft, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "La Communauté des Talents — Camer'Tech Europe",
@@ -18,8 +17,17 @@ export const metadata: Metadata = {
 
 export default function CommunautePage() {
   return (
-    <div style={{ paddingTop: "5.5rem" }}>
-      <Breadcrumbs current="La Communauté des Talents" />
+    <div style={{ paddingTop: "5rem" }}>
+      {/* En-tête de navigation autonome */}
+      <div className="ct" style={{ padding: "1.5rem 2rem 0" }}>
+        <Link
+          href="/"
+          className="btn btn-o"
+          style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, padding: "0.45rem 0.9rem" }}
+        >
+          <ArrowLeft size={15} /> Retour à l&apos;accueil
+        </Link>
+      </div>
 
       {/* Section autonome complète */}
       <Community />
