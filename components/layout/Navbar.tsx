@@ -2,13 +2,25 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTheme } from "@/components/layout/ThemeProvider";
 import { Sun, Moon, Menu, X } from "lucide-react";
+
+const NAV_ITEMS = [
+  { href: "/", label: "Accueil" },
+  { href: "/mission", label: "Mission" },
+  { href: "/camertech-connect", label: "CamerTech Connect" },
+  { href: "/evenements", label: "Événements" },
+  { href: "/communaute", label: "Communauté" },
+  { href: "/partenaires", label: "Partenaires" },
+  { href: "/media", label: "Médiathèque" },
+];
 
 export default function Navbar() {
   const { theme, toggle } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,12 +69,19 @@ export default function Navbar() {
           </Link>
 
           <ul className="nav-links">
-            <li><Link href="/mission">Mission</Link></li>
-            <li><Link href="/evenements">Événements</Link></li>
-            <li><Link href="/camertech-connect">CTC</Link></li>
-            <li><Link href="/communaute">Communauté</Link></li>
-            <li><Link href="/partenaires">Partenaires</Link></li>
-            <li><Link href="/media">Média</Link></li>
+            {NAV_ITEMS.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={active ? "active" : ""}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="nav-right">
@@ -125,14 +144,28 @@ export default function Navbar() {
               )}
             </button>
           </div>
-          <Link href="/" onClick={closeMobile}>Accueil</Link>
-          <Link href="/mission" onClick={closeMobile}>Mission &amp; Vision</Link>
-          <Link href="/evenements" onClick={closeMobile}>Événements &amp; Formats</Link>
-          <Link href="/camertech-connect" onClick={closeMobile}>CamerTech Connect (CTC)</Link>
-          <Link href="/communaute" onClick={closeMobile}>Communauté des Talents</Link>
-          <Link href="/partenaires" onClick={closeMobile}>Partenaires &amp; Écosystème</Link>
-          <Link href="/media" onClick={closeMobile}>Médiathèque &amp; Affiches</Link>
-          <Link href="/linkedin" onClick={closeMobile}>Activité LinkedIn</Link>
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={closeMobile}
+              style={{
+                color: pathname === item.href ? "var(--green)" : undefined,
+                fontWeight: pathname === item.href ? 700 : 500,
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href="/linkedin"
+            onClick={closeMobile}
+            style={{
+              color: pathname === "/linkedin" ? "var(--green)" : undefined,
+            }}
+          >
+            Activité LinkedIn
+          </Link>
           <a
             href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"
             target="_blank"
@@ -140,7 +173,7 @@ export default function Navbar() {
             onClick={closeMobile}
             style={{ color: "var(--green)", fontWeight: 700 }}
           >
-            Rejoindre la communauté
+            Rejoindre la communauté WhatsApp
           </a>
         </div>
       )}

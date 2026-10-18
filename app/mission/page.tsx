@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Mission from "@/components/sections/Mission";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Notre Mission & Nos Piliers — Camer'Tech Europe",
@@ -17,17 +18,8 @@ export const metadata: Metadata = {
 
 export default function MissionPage() {
   return (
-    <div style={{ paddingTop: "5rem" }}>
-      {/* En-tête de navigation autonome */}
-      <div className="ct" style={{ padding: "1.5rem 2rem 0" }}>
-        <Link
-          href="/"
-          className="btn btn-o"
-          style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, padding: "0.45rem 0.9rem" }}
-        >
-          <ArrowLeft size={15} /> Retour à l&apos;accueil
-        </Link>
-      </div>
+    <div style={{ paddingTop: "5.5rem" }}>
+      <Breadcrumbs current="Mission & Vision" />
 
       {/* Section autonome complète */}
       <Mission />
