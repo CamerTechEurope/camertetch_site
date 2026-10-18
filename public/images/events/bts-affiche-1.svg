@@ -1,0 +1,109 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' width='800' height='1000'>
+  <defs>
+    <linearGradient id='bgGrad' x1='0' y1='0' x2='0' y2='1'>
+      <stop offset='0%' stop-color='#0a5234'/>
+      <stop offset='45%' stop-color='#0f764a'/>
+      <stop offset='100%' stop-color='#063d25'/>
+    </linearGradient>
+    <linearGradient id='badgeGrad' x1='0' y1='0' x2='1' y2='0'>
+      <stop offset='0%' stop-color='#f5a623'/>
+      <stop offset='100%' stop-color='#e69512'/>
+    </linearGradient>
+  </defs>
+  
+  <rect width='800' height='1000' fill='url(#bgGrad)'/>
+  
+  <!-- Subtle flag curve -->
+  <path d='M0,0 Q400,120 800,0 L800,40 Q400,160 0,40 Z' fill='#e02b20' opacity='0.75'/>
+  <path d='M0,40 Q400,160 800,40 L800,80 Q400,200 0,80 Z' fill='#f5a623' opacity='0.75'/>
+  
+  <!-- Header Logo & Title -->
+  <g transform='translate(60, 60)'>
+    <rect width='36' height='36' rx='8' fill='#e02b20'/>
+    <rect x='10' y='6' width='16' height='24' rx='4' fill='#ffffff'/>
+    <text x='48' y='22' font-family='system-ui, -apple-system, sans-serif' font-size='18' font-weight='800' fill='#ffffff'>Camer'Tech</text>
+    <text x='48' y='36' font-family='system-ui, -apple-system, sans-serif' font-size='11' font-weight='600' fill='rgba(255,255,255,0.7)' letter-spacing='2'>EUROPE</text>
+  </g>
+  
+  <!-- BACK TO SCHOOL BIG BADGE -->
+  <g transform='translate(520, 60)'>
+    <rect width='220' height='54' rx='12' fill='#111827' stroke='#f5a623' stroke-width='2'/>
+    <text x='110' y='24' text-anchor='middle' font-family='Impact, sans-serif' font-size='18' font-weight='900' fill='#f5a623' letter-spacing='1'>BACK TO</text>
+    <text x='110' y='46' text-anchor='middle' font-family='Impact, sans-serif' font-size='22' font-weight='900' fill='#ffffff' letter-spacing='2'>SCHOOL</text>
+  </g>
+  
+  <!-- Main Hook -->
+  <text x='60' y='210' font-family='system-ui, -apple-system, sans-serif' font-size='38' font-weight='300' fill='#ffffff'>Bienvenue en</text>
+  <text x='60' y='295' font-family='system-ui, -apple-system, sans-serif' font-size='84' font-weight='900' fill='#ffffff' letter-spacing='-1'>FRANCE !</text>
+  
+  <!-- Cities & Date Badges -->
+  <g transform='translate(60, 330)'>
+    <rect width='90' height='36' rx='6' fill='#f5a623'/>
+    <text x='45' y='24' text-anchor='middle' font-family='system-ui, sans-serif' font-size='16' font-weight='800' fill='#111827'>Paris</text>
+    
+    <rect x='105' y='0' width='90' height='36' rx='6' fill='#f5a623'/>
+    <text x='150' y='24' text-anchor='middle' font-family='system-ui, sans-serif' font-size='16' font-weight='800' fill='#111827'>Lyon</text>
+    
+    <rect x='210' y='0' width='230' height='36' rx='6' fill='#ffffff'/>
+    <text x='325' y='24' text-anchor='middle' font-family='system-ui, sans-serif' font-size='15' font-weight='800' fill='#0a5234'>Samedi 24 Octobre 2026</text>
+  </g>
+  
+  <!-- Subtitle -->
+  <text x='60' y='415' font-family='system-ui, sans-serif' font-size='17' font-weight='500' fill='#e2f4ea'>
+    La communauté tech camerounaise organise une journée d'accueil pour vous.
+  </text>
+  
+  <!-- Program strip -->
+  <g transform='translate(60, 445)'>
+    <rect width='680' height='50' rx='8' fill='rgba(255,255,255,0.92)'/>
+    <text x='340' y='32' text-anchor='middle' font-family='system-ui, sans-serif' font-size='15' font-weight='700' fill='#111827'>
+      Balade urbaine  ·  Rencontres  ·  Bons plans  ·  Bowling en option
+    </text>
+  </g>
+  
+  <!-- City landmarks illustrations / silhouettes -->
+  <!-- Eiffel Tower Silhouette -->
+  <g transform='translate(130, 520)' fill='#ffffff' opacity='0.85'>
+    <polygon points='50,0 45,60 55,60'/>
+    <polygon points='42,60 35,160 65,160 58,60'/>
+    <rect x='28' y='160' width='44' height='10' rx='2'/>
+    <path d='M25,170 Q50,220 10,290 L90,290 Q50,220 75,170 Z'/>
+  </g>
+  
+  <!-- Fourvière Basilica Silhouette -->
+  <g transform='translate(560, 560)' fill='#ffffff' opacity='0.85'>
+    <rect x='10' y='60' width='24' height='190' rx='3'/>
+    <polygon points='10,60 22,10 34,60'/>
+    <rect x='90' y='60' width='24' height='190' rx='3'/>
+    <polygon points='90,60 102,10 114,60'/>
+    <rect x='34' y='100' width='56' height='150'/>
+    <path d='M34,100 Q62,50 90,100 Z'/>
+  </g>
+  
+  <!-- Center Text / Hook Box -->
+  <g transform='translate(260, 570)'>
+    <rect width='280' height='230' rx='16' fill='#ffffff' opacity='0.96'/>
+    <text x='140' y='45' text-anchor='middle' font-family='system-ui, sans-serif' font-size='14' font-weight='800' fill='#0a5234' letter-spacing='1'>NOUVEAU EN FRANCE ?</text>
+    <text x='140' y='78' text-anchor='middle' font-family='system-ui, sans-serif' font-size='18' font-weight='800' fill='#111827'>Fais tes premiers pas</text>
+    <text x='140' y='102' text-anchor='middle' font-family='system-ui, sans-serif' font-size='18' font-weight='800' fill='#111827'>avec la communauté</text>
+    
+    <line x1='30' y1='125' x2='250' y2='125' stroke='#e5e7eb' stroke-width='1'/>
+    
+    <text x='140' y='152' text-anchor='middle' font-family='system-ui, sans-serif' font-size='13' font-weight='600' fill='#4b5563'>Découverte de la ville</text>
+    <text x='140' y='174' text-anchor='middle' font-family='system-ui, sans-serif' font-size='13' font-weight='600' fill='#4b5563'>Conseils &amp; Réseau tech</text>
+    <text x='140' y='196' text-anchor='middle' font-family='system-ui, sans-serif' font-size='13' font-weight='700' fill='#e02b20'>Places limitées</text>
+  </g>
+  
+  <!-- Footer Bar -->
+  <rect y='870' width='800' height='130' fill='#062b1a'/>
+  <g transform='translate(60, 895)'>
+    <text x='0' y='22' font-family='system-ui, sans-serif' font-size='13' font-weight='700' fill='#f5a623'>RÉSERVATION OFFICIELLE :</text>
+    <text x='0' y='48' font-family='system-ui, sans-serif' font-size='18' font-weight='800' fill='#ffffff'>linktr.ee/CamerTechEurope</text>
+    <text x='0' y='72' font-family='system-ui, sans-serif' font-size='12' font-weight='500' fill='rgba(255,255,255,0.7)'>Infoline : +33 6 67 78 82 86 · +33 6 24 47 86 80</text>
+  </g>
+  
+  <g transform='translate(560, 915)'>
+    <text x='180' y='20' text-anchor='end' font-family='system-ui, sans-serif' font-size='12' font-weight='600' fill='rgba(255,255,255,0.6)'>En partenariat avec</text>
+    <text x='180' y='42' text-anchor='end' font-family='system-ui, sans-serif' font-size='16' font-weight='800' fill='#ffffff'>CAM WONDERS</text>
+  </g>
+</svg>

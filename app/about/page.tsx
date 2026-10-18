@@ -45,8 +45,8 @@ export default function AboutPage() {
           {/* 3 Cartes fondamentales : Genèse, Vision, Objectif */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginTop: "1rem" }}>
             <div className="card rev" style={{ padding: "1.75rem" }}>
-              <div style={{ width: 42, height: 42, borderRadius: 10, background: "rgba(10, 155, 94, 0.12)", color: "var(--green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
-                <Compass size={22} />
+              <div style={{ color: "var(--green)", marginBottom: "0.75rem" }}>
+                <Compass size={24} />
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: "0.5rem", color: "var(--text)" }}>Notre Genèse</h3>
               <p style={{ fontSize: 14.5, color: "var(--muted)", lineHeight: 1.6 }}>
@@ -55,8 +55,8 @@ export default function AboutPage() {
             </div>
 
             <div className="card rev" style={{ padding: "1.75rem" }}>
-              <div style={{ width: 42, height: 42, borderRadius: 10, background: "rgba(245, 166, 35, 0.12)", color: "var(--yellow)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
-                <Target size={22} />
+              <div style={{ color: "var(--yellow)", marginBottom: "0.75rem" }}>
+                <Target size={24} />
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: "0.5rem", color: "var(--text)" }}>Notre Vision</h3>
               <p style={{ fontSize: 14.5, color: "var(--muted)", lineHeight: 1.6 }}>
@@ -65,8 +65,8 @@ export default function AboutPage() {
             </div>
 
             <div className="card rev" style={{ padding: "1.75rem" }}>
-              <div style={{ width: 42, height: 42, borderRadius: 10, background: "rgba(224, 43, 32, 0.12)", color: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
-                <Globe2 size={22} />
+              <div style={{ color: "var(--red)", marginBottom: "0.75rem" }}>
+                <Globe2 size={24} />
               </div>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: "0.5rem", color: "var(--text)" }}>Le Pont Afrique - Europe</h3>
               <p style={{ fontSize: 14.5, color: "var(--muted)", lineHeight: 1.6 }}>
@@ -93,10 +93,8 @@ export default function AboutPage() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
             <div className="card rev" style={{ padding: "2rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "1rem" }}>
-                <div style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(10, 155, 94, 0.15)", color: "var(--green)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Zap size={20} />
-                </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "1rem" }}>
+                <Zap size={22} style={{ color: "var(--green)" }} />
                 <h3 style={{ fontSize: 18, fontWeight: 700 }}>1. Accélération de carrières</h3>
               </div>
               <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: "1.25rem" }}>
@@ -108,10 +106,8 @@ export default function AboutPage() {
             </div>
 
             <div className="card rev" style={{ padding: "2rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "1rem" }}>
-                <div style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(245, 166, 35, 0.15)", color: "var(--yellow)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Building2 size={20} />
-                </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "1rem" }}>
+                <Building2 size={22} style={{ color: "var(--yellow)" }} />
                 <h3 style={{ fontSize: 18, fontWeight: 700 }}>2. Grandes rencontres &amp; CTC</h3>
               </div>
               <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: "1.25rem" }}>
@@ -123,10 +119,8 @@ export default function AboutPage() {
             </div>
 
             <div className="card rev" style={{ padding: "2rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "1rem" }}>
-                <div style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(10, 155, 94, 0.15)", color: "var(--green)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Globe2 size={20} />
-                </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "1rem" }}>
+                <Globe2 size={22} style={{ color: "var(--green)" }} />
                 <h3 style={{ fontSize: 18, fontWeight: 700 }}>3. Synergies avec l&apos;écosystème</h3>
               </div>
               <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: "1.25rem" }}>

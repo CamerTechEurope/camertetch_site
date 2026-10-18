@@ -1,0 +1,68 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' width='800' height='1000'>
+  <defs>
+    <linearGradient id='bgGrad3' x1='0' y1='0' x2='0' y2='1'>
+      <stop offset='0%' stop-color='#0a5234'/>
+      <stop offset='100%' stop-color='#052d1c'/>
+    </linearGradient>
+  </defs>
+  
+  <rect width='800' height='1000' fill='url(#bgGrad3)'/>
+  
+  <!-- Header -->
+  <g transform='translate(60, 50)'>
+    <text x='0' y='30' font-family='system-ui, sans-serif' font-size='18' font-weight='800' fill='#ffffff'>Camer'Tech Europe</text>
+    <rect x='520' y='0' width='160' height='42' rx='8' fill='#111827' stroke='#f5a623' stroke-width='1.5'/>
+    <text x='600' y='26' text-anchor='middle' font-family='Impact, sans-serif' font-size='18' font-weight='900' fill='#ffffff'>BACK TO SCHOOL</text>
+  </g>
+  
+  <text x='60' y='160' font-family='system-ui, sans-serif' font-size='22' font-weight='700' fill='#ffffff'>Un accueil complet pour les nouveaux en France</text>
+  <text x='60' y='225' font-family='system-ui, sans-serif' font-size='48' font-weight='900' fill='#f5a623'>AU PROGRAMME</text>
+  
+  <!-- 4 Program pillars cards -->
+  <g transform='translate(60, 270)'>
+    <!-- 1 -->
+    <rect width='325' height='160' rx='12' fill='rgba(255,255,255,0.95)'/>
+    <text x='30' y='45' font-family='system-ui, sans-serif' font-size='14' font-weight='800' fill='#0a5234'>01</text>
+    <text x='30' y='80' font-family='system-ui, sans-serif' font-size='22' font-weight='800' fill='#111827'>Bons plans</text>
+    <text x='30' y='110' font-family='system-ui, sans-serif' font-size='13' font-weight='500' fill='#6b7280'>Transports, logement, démarches et astuces</text>
+    
+    <!-- 2 -->
+    <rect x='355' y='0' width='325' height='160' rx='12' fill='rgba(255,255,255,0.95)'/>
+    <text x='385' y='45' font-family='system-ui, sans-serif' font-size='14' font-weight='800' fill='#f5a623'>02</text>
+    <text x='385' y='80' font-family='system-ui, sans-serif' font-size='22' font-weight='800' fill='#111827'>Bowling</text>
+    <text x='385' y='110' font-family='system-ui, sans-serif' font-size='13' font-weight='500' fill='#6b7280'>Partie amicale en option pour décompresser</text>
+    
+    <!-- 3 -->
+    <rect y='190' width='325' height='160' rx='12' fill='rgba(255,255,255,0.95)'/>
+    <text x='30' y='235' font-family='system-ui, sans-serif' font-size='14' font-weight='800' fill='#0a5234'>03</text>
+    <text x='30' y='270' font-family='system-ui, sans-serif' font-size='22' font-weight='800' fill='#111827'>Balade urbaine</text>
+    <text x='30' y='300' font-family='system-ui, sans-serif' font-size='13' font-weight='500' fill='#6b7280'>Découverte des repères dans Paris &amp; Lyon</text>
+    
+    <!-- 4 -->
+    <rect x='355' y='190' width='325' height='160' rx='12' fill='rgba(255,255,255,0.95)'/>
+    <text x='385' y='235' font-family='system-ui, sans-serif' font-size='14' font-weight='800' fill='#e02b20'>04</text>
+    <text x='385' y='270' font-family='system-ui, sans-serif' font-size='22' font-weight='800' fill='#111827'>Networking</text>
+    <text x='385' y='300' font-family='system-ui, sans-serif' font-size='13' font-weight='500' fill='#6b7280'>Échanges directs avec les pairs de la diaspora</text>
+  </g>
+  
+  <!-- Bowling Pins graphic illustration -->
+  <g transform='translate(400, 720)' fill='#ffffff'>
+    <!-- Bowling ball -->
+    <circle cx='0' cy='40' r='38' fill='#e02b20'/>
+    <circle cx='-10' cy='30' r='4' fill='#111827'/>
+    <circle cx='5' cy='25' r='4' fill='#111827'/>
+    <circle cx='0' cy='45' r='4' fill='#111827'/>
+    <!-- Pins around -->
+    <ellipse cx='-80' cy='0' rx='14' ry='42' fill='#ffffff'/>
+    <rect x='-88' y='-10' width='16' height='5' fill='#e02b20'/>
+    <ellipse cx='80' cy='0' rx='14' ry='42' fill='#ffffff'/>
+    <rect x='72' y='-10' width='16' height='5' fill='#e02b20'/>
+  </g>
+  
+  <!-- Footer -->
+  <rect y='880' width='800' height='120' fill='#02140c'/>
+  <g transform='translate(60, 915)'>
+    <text x='0' y='20' font-family='system-ui, sans-serif' font-size='14' font-weight='700' fill='#f5a623'>SAMEDI 24 OCTOBRE 2026 · PARIS &amp; LYON</text>
+    <text x='0' y='46' font-family='system-ui, sans-serif' font-size='17' font-weight='800' fill='#ffffff'>Réservations : linktr.ee/CamerTechEurope</text>
+  </g>
+</svg>

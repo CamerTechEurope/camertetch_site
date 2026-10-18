@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ExternalLink, Calendar, MapPin, Ticket, Phone, Sparkles, Compass, Users } from "lucide-react";
+import { ArrowLeft, ExternalLink, MapPin, Ticket, Phone, Compass, Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Back to School 2026 (Paris & Lyon) — Camer'Tech Europe",
@@ -15,11 +15,34 @@ export const metadata: Metadata = {
   },
 };
 
+const BTS_POSTERS = [
+  {
+    src: "/images/events/bts-affiche-1.svg",
+    title: "Affiche Principale — Bienvenue en France !",
+    subtitle: "Paris & Lyon · Samedi 24 Octobre 2026",
+  },
+  {
+    src: "/images/events/bts-affiche-2.svg",
+    title: "Nouveau en France ? Rejoins la communauté",
+    subtitle: "Checklist d'intégration & parrainage",
+  },
+  {
+    src: "/images/events/bts-affiche-3.svg",
+    title: "Au Programme : Balade, Bons plans & Bowling",
+    subtitle: "Déroulement complet de la journée",
+  },
+  {
+    src: "/images/events/affiche-back-to-school.jpg",
+    title: "La Communauté Camer'Tech Réunie",
+    subtitle: "Moments d'échanges et convivialité",
+  },
+];
+
 export default function BackToSchoolPage() {
   return (
     <div style={{ paddingTop: "5.5rem" }}>
-      {/* Fil d'Ariane & Retour */}
-      <div className="ct" style={{ padding: "1.25rem 2rem 0", display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+      {/* Fil d'Ariane sobre */}
+      <div className="ct" style={{ padding: "1.25rem 2rem 0", display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
         <Link
           href="/evenements"
           className="btn btn-o"
@@ -27,17 +50,15 @@ export default function BackToSchoolPage() {
         >
           <ArrowLeft size={15} /> Retour aux événements
         </Link>
-        <span style={{ fontSize: 13, color: "var(--muted)" }}>/ Back to School 2026 (Paris &amp; Lyon)</span>
+        <span style={{ fontSize: 13, color: "var(--muted)" }}>/ Back to School 2026</span>
       </div>
 
       {/* Hero de l'événement */}
-      <section style={{ padding: "2.5rem 2rem 3.5rem" }}>
+      <section style={{ padding: "2.5rem 2rem 4rem" }}>
         <div className="ct">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "3rem", alignItems: "center" }}>
             <div className="rev">
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 12px", borderRadius: 100, background: "rgba(10, 155, 94, 0.12)", color: "var(--green)", fontSize: 12.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "1rem" }}>
-                <Sparkles size={14} /> Événement d&apos;accueil et d&apos;intégration
-              </div>
+              <div className="label">Accueil &amp; Intégration 2026</div>
 
               <h1 style={{ fontFamily: "var(--display)", fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)", fontWeight: 800, lineHeight: 1.15, marginBottom: "1rem", color: "var(--text)" }}>
                 Back to School <span className="g">Camer&apos;Tech</span>
@@ -51,31 +72,11 @@ export default function BackToSchoolPage() {
                 Tu viens d&apos;arriver en France pour tes études ou ton premier job ? Tu es déjà installé et tu souhaites élargir ton réseau professionnel et amical ? Rejoins la communauté Camer&apos;Tech Europe le <strong>samedi 24 octobre 2026</strong> en simultané à <strong>Paris</strong> et à <strong>Lyon</strong>.
               </p>
 
-              {/* Badges pratiques */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: "2.5rem" }}>
-                <div className="card" style={{ padding: "10px 16px", display: "flex", alignItems: "center", gap: 10 }}>
-                  <Calendar size={18} style={{ color: "var(--green)" }} />
-                  <div>
-                    <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", fontWeight: 700 }}>Date</div>
-                    <div style={{ fontSize: 13.5, fontWeight: 700 }}>Samedi 24 Octobre 2026</div>
-                  </div>
-                </div>
-
-                <div className="card" style={{ padding: "10px 16px", display: "flex", alignItems: "center", gap: 10 }}>
-                  <MapPin size={18} style={{ color: "var(--red)" }} />
-                  <div>
-                    <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", fontWeight: 700 }}>Villes</div>
-                    <div style={{ fontSize: 13.5, fontWeight: 700 }}>Paris &amp; Lyon</div>
-                  </div>
-                </div>
-
-                <div className="card" style={{ padding: "10px 16px", display: "flex", alignItems: "center", gap: 10 }}>
-                  <Ticket size={18} style={{ color: "var(--yellow)" }} />
-                  <div>
-                    <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", fontWeight: 700 }}>Formule</div>
-                    <div style={{ fontSize: 13.5, fontWeight: 700 }}>Balade gratuite · Bowling en option</div>
-                  </div>
-                </div>
+              {/* Repères pratiques sobres */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", marginBottom: "2rem", fontSize: 14.5, color: "var(--muted)" }}>
+                <span><strong style={{ color: "var(--text)" }}>Date :</strong> Samedi 24 Octobre 2026</span>
+                <span><strong style={{ color: "var(--text)" }}>Villes :</strong> Paris &amp; Lyon</span>
+                <span><strong style={{ color: "var(--text)" }}>Formule :</strong> Balade gratuite · Bowling en option</span>
               </div>
 
               {/* Bouton de réservation officiel */}
@@ -101,7 +102,7 @@ export default function BackToSchoolPage() {
               </div>
             </div>
 
-            {/* Visuel & Affiche */}
+            {/* Affiche principale */}
             <div className="rev">
               <div
                 className="card"
@@ -110,59 +111,64 @@ export default function BackToSchoolPage() {
                   borderRadius: "var(--rl)",
                   overflow: "hidden",
                   boxShadow: "var(--shadow-lg)",
-                  border: "1px solid var(--border)",
-                  aspectRatio: "3/4",
+                  aspectRatio: "4/5",
                   maxHeight: "540px",
                   margin: "0 auto",
                 }}
               >
                 <Image
-                  src="/images/events/affiche-back-to-school.jpg"
+                  src="/images/events/bts-affiche-1.svg"
                   alt="Affiche Officielle Back to School Camer'Tech Europe à Paris et Lyon"
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "contain", background: "#0a5234" }}
                   sizes="(max-width: 768px) 100vw, 480px"
                   priority
                 />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                    padding: "1.75rem",
-                    color: "#fff",
-                  }}
-                >
-                  <span style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px", color: "var(--yellow)" }}>
-                    Événement Diaspora Tech
-                  </span>
-                  <div style={{ fontSize: 20, fontWeight: 800, fontFamily: "var(--display)", marginTop: 4 }}>
-                    Paris &amp; Lyon · 24 Octobre 2026
-                  </div>
-                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.8)", margin: "6px 0 14px", lineHeight: 1.4 }}>
-                    Balade urbaine · Bons plans d&apos;intégration · Rencontres · Bowling
-                  </p>
-                  <a
-                    href="https://linktr.ee/CamerTechEurope"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn-p"
-                    style={{ fontSize: 13, padding: "0.55rem 1rem", justifyContent: "center" }}
-                  >
-                    Réserver sur Linktree <ExternalLink size={14} style={{ marginLeft: 4 }} />
-                  </a>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Programme détaillé */}
+      {/* Galerie des Affiches et Visuels Officiels */}
       <section style={{ padding: "4rem 2rem", background: "var(--bg2)", borderTop: "1px solid var(--border2)", borderBottom: "1px solid var(--border2)" }}>
+        <div className="ct">
+          <div className="rev" style={{ maxWidth: 640, marginBottom: "2.5rem" }}>
+            <div className="label">Supports officiels</div>
+            <h2 className="sec">Les visuels de <span className="g">l&apos;édition 2026.</span></h2>
+            <p className="desc">
+              Retrouvez l&apos;ensemble des affiches et supports partagés pour l&apos;accueil des nouveaux arrivants à Paris et Lyon.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
+            {BTS_POSTERS.map((poster, i) => (
+              <div key={i} className="card rev" style={{ overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                <div style={{ position: "relative", width: "100%", aspectRatio: "4/5", background: "var(--bg)" }}>
+                  <Image
+                    src={poster.src}
+                    alt={poster.title}
+                    fill
+                    style={{ objectFit: "contain" }}
+                    sizes="(max-width: 768px) 100vw, 300px"
+                  />
+                </div>
+                <div style={{ padding: "1.25rem" }}>
+                  <div style={{ fontSize: 14.5, fontWeight: 700, color: "var(--text)", marginBottom: 4 }}>
+                    {poster.title}
+                  </div>
+                  <div style={{ fontSize: 12.5, color: "var(--muted)" }}>
+                    {poster.subtitle}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Programme détaillé */}
+      <section style={{ padding: "4rem 2rem" }}>
         <div className="ct">
           <div className="rev" style={{ maxWidth: 700, marginBottom: "2.5rem" }}>
             <div className="label">Au programme</div>
@@ -237,12 +243,12 @@ export default function BackToSchoolPage() {
       </section>
 
       {/* Informations pratiques, Partenaires & Contact */}
-      <section style={{ padding: "4rem 2rem 6rem" }}>
+      <section style={{ padding: "2rem 2rem 6rem" }}>
         <div className="ct">
           <div className="card rev" style={{ padding: "2.5rem", display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: 840, margin: "0 auto" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
               <div>
-                <span className="label" style={{ marginBottom: 4 }}>Informations &amp; Organisation</span>
+                <div className="label" style={{ marginBottom: 4 }}>Informations &amp; Organisation</div>
                 <h3 style={{ fontFamily: "var(--display)", fontSize: 22, fontWeight: 800, margin: 0, color: "var(--text)" }}>
                   Infoline &amp; Partenaires de l&apos;événement
                 </h3>

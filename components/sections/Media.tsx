@@ -148,9 +148,6 @@ export default function Media({ isHomePreview = false }: { isHomePreview?: boole
 
           {/* Navigation carrousel discret et efficace */}
           <div className="rev" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span className="carousel-counter-tag">
-              07 AFFICHES &amp; REPLAYS
-            </span>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
               <button
                 type="button"

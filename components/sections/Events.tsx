@@ -139,7 +139,6 @@ export default function Events({ isHomePreview = false }: { isHomePreview?: bool
 
           {/* Controls */}
           <div className="rev" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span className="carousel-counter-tag">03 FORMATS D&apos;EXCELLENCE</span>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
               <button
                 type="button"
