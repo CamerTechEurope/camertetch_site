@@ -1,7 +1,7 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
 
 interface ThemeContextType {
   theme: Theme;
@@ -27,20 +27,47 @@ function updateFavicon(mode: Theme) {
   }
 }
 
-function applyThemeToDOM(mode: Theme) {
+export function applyThemeToDOM(mode: Theme) {
   if (typeof document === "undefined") return;
-  document.documentElement.setAttribute("data-theme", mode);
-  if (document.body) {
-    document.body.setAttribute("data-theme", mode);
+  const root = document.documentElement;
+  const body = document.body;
+
+  root.setAttribute("data-theme", mode);
+  root.style.colorScheme = mode;
+  if (body) {
+    body.setAttribute("data-theme", mode);
+    body.style.colorScheme = mode;
   }
+
   if (mode === "dark") {
-    document.documentElement.classList.add("dark");
-    document.body?.classList.add("dark");
+    root.classList.add("dark");
+    root.classList.remove("light");
+    if (body) {
+      body.classList.add("dark");
+      body.classList.remove("light");
+    }
   } else {
-    document.documentElement.classList.remove("dark");
-    document.body?.classList.remove("dark");
+    root.classList.remove("dark");
+    root.classList.add("light");
+    if (body) {
+      body.classList.remove("dark");
+      body.classList.add("light");
+    }
   }
+
   updateFavicon(mode);
+
+  try {
+    localStorage.setItem("ct-theme", mode);
+  } catch {
+    // ignore
+  }
+
+  try {
+    window.dispatchEvent(new CustomEvent("ct-theme-change", { detail: { theme: mode } }));
+  } catch {
+    // ignore
+  }
 }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -62,30 +89,43 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     }
     setTheme(initial);
     applyThemeToDOM(initial);
-  }, []);
 
-  const setThemeMode = (mode: Theme) => {
-    setTheme(mode);
-    applyThemeToDOM(mode);
-    try {
-      localStorage.setItem("ct-theme", mode);
-    } catch {
-      // ignore
-    }
-  };
-
-  const toggle = () => {
-    setTheme((prev) => {
-      const next: Theme = prev === "dark" ? "light" : "dark";
-      applyThemeToDOM(next);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemChange = (e: MediaQueryListEvent) => {
       try {
-        localStorage.setItem("ct-theme", next);
+        const saved = localStorage.getItem("ct-theme");
+        if (!saved) {
+          const sysTheme: Theme = e.matches ? "dark" : "light";
+          setTheme(sysTheme);
+          applyThemeToDOM(sysTheme);
+        }
       } catch {
         // ignore
       }
+    };
+    mediaQuery.addEventListener("change", handleSystemChange);
+    return () => mediaQuery.removeEventListener("change", handleSystemChange);
+  }, []);
+
+  const setThemeMode = useCallback((mode: Theme) => {
+    setTheme(mode);
+    applyThemeToDOM(mode);
+  }, []);
+
+  const toggle = useCallback(() => {
+    setTheme((prev) => {
+      let current = prev;
+      if (typeof document !== "undefined") {
+        const domAttr = document.documentElement.getAttribute("data-theme");
+        if (domAttr === "dark" || domAttr === "light") {
+          current = domAttr;
+        }
+      }
+      const next: Theme = current === "dark" ? "light" : "dark";
+      applyThemeToDOM(next);
       return next;
     });
-  };
+  }, []);
 
   return (
     <ThemeCtx.Provider value={{ theme: mounted ? theme : "light", setThemeMode, toggle }}>

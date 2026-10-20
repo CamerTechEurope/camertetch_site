@@ -10,6 +10,13 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileSections, setMobileSections] = useState<Record<string, boolean>>({
+    home: true,
+    events: true,
+    community: true,
+    entreprise: true,
+  });
+
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +53,7 @@ export default function Navbar() {
     }
     closeTimeoutRef.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 160);
+    }, 200);
   };
 
   const closeAll = () => {
@@ -55,6 +62,13 @@ export default function Navbar() {
     }
     setMobileOpen(false);
     setOpenDropdown(null);
+  };
+
+  const toggleMobileSection = (key: string) => {
+    setMobileSections((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   };
 
   return (
@@ -94,14 +108,14 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* 4 Onglets Principaux ultra-épurés, sobres et lisibles */}
+          {/* 4 Onglets Principaux ultra-épurés, sobres et déroulants */}
           <ul className="nav-links" style={{ gap: "0.5rem" }}>
             {/* 1. Onglet Accueil */}
             <li
               className="relative"
               onMouseEnter={() => handleMouseEnter("home")}
               onMouseLeave={handleMouseLeave}
-              style={{ display: "flex", alignItems: "center" }}
+              style={{ display: "flex", alignItems: "center", position: "relative", height: "100%" }}
             >
               <Link
                 href="/"
@@ -126,9 +140,9 @@ export default function Navbar() {
                   onMouseLeave={handleMouseLeave}
                   style={{
                     position: "absolute",
-                    top: "100%",
+                    top: "calc(100% - 6px)",
                     left: 0,
-                    paddingTop: 6,
+                    paddingTop: 8,
                     zIndex: 1000,
                   }}
                 >
@@ -138,7 +152,7 @@ export default function Navbar() {
                       background: "var(--card)",
                       border: "1px solid var(--border2)",
                       borderRadius: 8,
-                      boxShadow: "0 10px 24px rgba(0,0,0,0.1)",
+                      boxShadow: "0 10px 24px rgba(0,0,0,0.12)",
                       padding: 5,
                       display: "flex",
                       flexDirection: "column",
@@ -189,7 +203,7 @@ export default function Navbar() {
               className="relative"
               onMouseEnter={() => handleMouseEnter("events")}
               onMouseLeave={handleMouseLeave}
-              style={{ display: "flex", alignItems: "center" }}
+              style={{ display: "flex", alignItems: "center", position: "relative", height: "100%" }}
             >
               <Link
                 href="/evenements"
@@ -214,19 +228,19 @@ export default function Navbar() {
                   onMouseLeave={handleMouseLeave}
                   style={{
                     position: "absolute",
-                    top: "100%",
+                    top: "calc(100% - 6px)",
                     left: 0,
-                    paddingTop: 6,
+                    paddingTop: 8,
                     zIndex: 1000,
                   }}
                 >
                   <div
                     style={{
-                      minWidth: 160,
+                      minWidth: 175,
                       background: "var(--card)",
                       border: "1px solid var(--border2)",
                       borderRadius: 8,
-                      boxShadow: "0 10px 24px rgba(0,0,0,0.1)",
+                      boxShadow: "0 10px 24px rgba(0,0,0,0.12)",
                       padding: 5,
                       display: "flex",
                       flexDirection: "column",
@@ -311,7 +325,7 @@ export default function Navbar() {
               className="relative"
               onMouseEnter={() => handleMouseEnter("community")}
               onMouseLeave={handleMouseLeave}
-              style={{ display: "flex", alignItems: "center" }}
+              style={{ display: "flex", alignItems: "center", position: "relative", height: "100%" }}
             >
               <Link
                 href="/communaute"
@@ -336,19 +350,19 @@ export default function Navbar() {
                   onMouseLeave={handleMouseLeave}
                   style={{
                     position: "absolute",
-                    top: "100%",
+                    top: "calc(100% - 6px)",
                     left: 0,
-                    paddingTop: 6,
+                    paddingTop: 8,
                     zIndex: 1000,
                   }}
                 >
                   <div
                     style={{
-                      minWidth: 145,
+                      minWidth: 150,
                       background: "var(--card)",
                       border: "1px solid var(--border2)",
                       borderRadius: 8,
-                      boxShadow: "0 10px 24px rgba(0,0,0,0.1)",
+                      boxShadow: "0 10px 24px rgba(0,0,0,0.12)",
                       padding: 5,
                       display: "flex",
                       flexDirection: "column",
@@ -401,7 +415,7 @@ export default function Navbar() {
               className="relative"
               onMouseEnter={() => handleMouseEnter("entreprise")}
               onMouseLeave={handleMouseLeave}
-              style={{ display: "flex", alignItems: "center" }}
+              style={{ display: "flex", alignItems: "center", position: "relative", height: "100%" }}
             >
               <Link
                 href="/partenaires"
@@ -426,19 +440,19 @@ export default function Navbar() {
                   onMouseLeave={handleMouseLeave}
                   style={{
                     position: "absolute",
-                    top: "100%",
+                    top: "calc(100% - 6px)",
                     left: 0,
-                    paddingTop: 6,
+                    paddingTop: 8,
                     zIndex: 1000,
                   }}
                 >
                   <div
                     style={{
-                      minWidth: 145,
+                      minWidth: 150,
                       background: "var(--card)",
                       border: "1px solid var(--border2)",
                       borderRadius: 8,
-                      boxShadow: "0 10px 24px rgba(0,0,0,0.1)",
+                      boxShadow: "0 10px 24px rgba(0,0,0,0.12)",
                       padding: 5,
                       display: "flex",
                       flexDirection: "column",
@@ -486,6 +500,7 @@ export default function Navbar() {
           </ul>
 
           <div className="nav-right">
+            {/* Bouton de bascule thème clair / sombre */}
             <button
               type="button"
               className="theme-toggle"
@@ -501,11 +516,12 @@ export default function Navbar() {
               )}
             </button>
 
+            {/* Bouton CTA Rejoindre */}
             <a
               href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"
               target="_blank"
               rel="noreferrer"
-              className="btn-nav"
+              className="btn-nav hidden sm:inline-block"
             >
               Rejoindre
             </a>
@@ -514,7 +530,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="theme-toggle md:hidden"
+              className="theme-toggle"
               id="mobileMenuBtn"
               aria-label="Menu de navigation"
             >
@@ -524,12 +540,28 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Menu mobile aéré, propre, structuré en 4 sections sans icônes superflues */}
+      {/* Menu mobile aéré, propre, structuré en 4 sections avec accordéons */}
       {mobileOpen && (
-        <div className="mobile-nav-menu" style={{ padding: "1.5rem" }}>
+        <div className="mobile-nav-menu">
           {/* Header Mobile : Thème switch */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "1rem", borderBottom: "1px solid var(--border2)", marginBottom: "1rem" }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "1px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingBottom: "1rem",
+              borderBottom: "1px solid var(--border2)",
+            }}
+          >
+            <span
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                color: "var(--muted)",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+              }}
+            >
               Navigation
             </span>
             <button
@@ -551,91 +583,191 @@ export default function Navbar() {
           </div>
 
           {/* Section 1 : Accueil */}
-          <div style={{ marginBottom: "1.25rem" }}>
-            <Link
-              href="/"
-              onClick={closeAll}
-              style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", display: "block", marginBottom: 6 }}
+          <div style={{ marginBottom: "0.75rem" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: 6,
+              }}
             >
-              Accueil
-            </Link>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
-              <Link href="/about" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                À propos
+              <Link
+                href="/"
+                onClick={closeAll}
+                style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", textDecoration: "none" }}
+              >
+                Accueil
               </Link>
-              <Link href="/about#mission" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                Notre mission
-              </Link>
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("home")}
+                style={{ background: "none", border: "none", color: "var(--muted)", cursor: "pointer", padding: "4px 8px" }}
+                aria-label="Dérouler Accueil"
+              >
+                <ChevronDown
+                  size={16}
+                  style={{
+                    transform: mobileSections.home ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.2s ease",
+                  }}
+                />
+              </button>
             </div>
+            {mobileSections.home && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
+                <Link href="/about" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  À propos
+                </Link>
+                <Link href="/about#mission" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  Notre mission
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Section 2 : Événements */}
-          <div style={{ marginBottom: "1.25rem" }}>
-            <Link
-              href="/evenements"
-              onClick={closeAll}
-              style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", display: "block", marginBottom: 6 }}
+          <div style={{ marginBottom: "0.75rem" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: 6,
+              }}
             >
-              Événements
-            </Link>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
-              <Link href="/evenements/back-to-school" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                Back to school
+              <Link
+                href="/evenements"
+                onClick={closeAll}
+                style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", textDecoration: "none" }}
+              >
+                Événements
               </Link>
-              <Link href="/camertech-connect" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                CTC
-              </Link>
-              <Link href="/evenements#formats" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                En ligne
-              </Link>
-              <Link href="/evenements" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                Autres événements
-              </Link>
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("events")}
+                style={{ background: "none", border: "none", color: "var(--muted)", cursor: "pointer", padding: "4px 8px" }}
+                aria-label="Dérouler Événements"
+              >
+                <ChevronDown
+                  size={16}
+                  style={{
+                    transform: mobileSections.events ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.2s ease",
+                  }}
+                />
+              </button>
             </div>
+            {mobileSections.events && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
+                <Link href="/evenements/back-to-school" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  Back to school
+                </Link>
+                <Link href="/camertech-connect" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  CTC
+                </Link>
+                <Link href="/evenements#formats" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  En ligne
+                </Link>
+                <Link href="/evenements" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  Autres événements
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Section 3 : Communauté */}
-          <div style={{ marginBottom: "1.25rem" }}>
-            <Link
-              href="/communaute"
-              onClick={closeAll}
-              style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", display: "block", marginBottom: 6 }}
+          <div style={{ marginBottom: "0.75rem" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: 6,
+              }}
             >
-              Communauté
-            </Link>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
-              <Link href="/communaute" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                Membres
-              </Link>
-              <a
-                href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/communaute"
                 onClick={closeAll}
-                style={{ fontSize: 13.5, color: "var(--muted)" }}
+                style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", textDecoration: "none" }}
               >
-                Rejoindre
-              </a>
+                Communauté
+              </Link>
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("community")}
+                style={{ background: "none", border: "none", color: "var(--muted)", cursor: "pointer", padding: "4px 8px" }}
+                aria-label="Dérouler Communauté"
+              >
+                <ChevronDown
+                  size={16}
+                  style={{
+                    transform: mobileSections.community ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.2s ease",
+                  }}
+                />
+              </button>
             </div>
+            {mobileSections.community && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
+                <Link href="/communaute" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  Membres
+                </Link>
+                <a
+                  href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={closeAll}
+                  style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}
+                >
+                  Rejoindre
+                </a>
+              </div>
+            )}
           </div>
 
           {/* Section 4 : Entreprise */}
-          <div style={{ marginBottom: "1.5rem" }}>
-            <Link
-              href="/partenaires"
-              onClick={closeAll}
-              style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", display: "block", marginBottom: 6 }}
+          <div style={{ marginBottom: "1rem" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: 6,
+              }}
             >
-              Entreprise
-            </Link>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
-              <Link href="/partenaires" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                Partenaires
+              <Link
+                href="/partenaires"
+                onClick={closeAll}
+                style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", textDecoration: "none" }}
+              >
+                Entreprise
               </Link>
-              <Link href="/media" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)" }}>
-                Médias
-              </Link>
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("entreprise")}
+                style={{ background: "none", border: "none", color: "var(--muted)", cursor: "pointer", padding: "4px 8px" }}
+                aria-label="Dérouler Entreprise"
+              >
+                <ChevronDown
+                  size={16}
+                  style={{
+                    transform: mobileSections.entreprise ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.2s ease",
+                  }}
+                />
+              </button>
             </div>
+            {mobileSections.entreprise && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 12 }}>
+                <Link href="/partenaires" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  Partenaires
+                </Link>
+                <Link href="/media" onClick={closeAll} style={{ fontSize: 13.5, color: "var(--muted)", textDecoration: "none" }}>
+                  Médias
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Bouton d'action WhatsApp Mobile */}
