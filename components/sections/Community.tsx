@@ -1,280 +1,353 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
 import Image from "next/image";
-import { FadeUp, stagger, fadeItem, SecLabel, SecTitle, Hl, Btn } from "@/components/ui/primitives";
+import Link from "next/link";
+import { Star, MapPin, X, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
 
-/* ─── TÉMOIGNAGES ─── */
 const TESTIMONIALS = [
   {
-    quote: "Grâce à Camer'Tech Europe, j'ai trouvé mon premier CDI à Paris en moins de 3 semaines. Le réseau est d'une densité rare — les membres se soutiennent vraiment.",
+    quote: "Grâce à Camer'Tech Europe, j'ai trouvé mon premier CDI à Paris en moins de 3 semaines. Le réseau est dense et les membres se soutiennent vraiment.",
     name: "Aristide M.",
-    role: "Développeur Full Stack",
-    company: "Paris",
+    role: "Développeur Full Stack · Paris",
     initials: "AM",
-    src: null as string | null,
-    path: "/images/community/aristide-m.jpg",
+    company: "Société Générale",
   },
   {
-    quote: "Le workshop sur les entretiens m'a transformée. J'ai décroché deux offres d'alternance dans des entreprises tech de premier plan en moins d'un mois.",
+    quote: "Le workshop sur les entretiens m'a totalement préparée. J'ai décroché deux offres en alternance dans des entreprises tech de premier plan.",
     name: "Sandra N.",
-    role: "Data Engineer",
-    company: "Lyon",
+    role: "Data Engineer · Lyon",
     initials: "SN",
-    src: null as string | null,
-    path: "/images/community/sandra-n.jpg",
+    company: "Capgemini",
   },
   {
-    quote: "CamerTech Connect a été un tournant. Un collaborateur, des early adopters et un premier client — tout ça le même jour. Aucune autre communauté n'offre ça.",
+    quote: "CamerTech Connect a été un tournant. J'ai trouvé des collaborateurs, des early adopters et un premier client le même jour.",
     name: "Kevin F.",
-    role: "Entrepreneur Tech",
-    company: "Berlin",
+    role: "Entrepreneur Tech · Berlin",
     initials: "KF",
-    src: null as string | null,
-    path: "/images/community/kevin-f.jpg",
+    company: "Fondateur SaaS",
+  },
+  {
+    quote: "La force du réseau, c'est l'accès direct aux décideurs, les partages d'expérience sans langue de bois et la bienveillance des membres confirmés.",
+    name: "Carine E.",
+    role: "Lead Cloud Architect · Bruxelles",
+    initials: "CE",
+    company: "AWS Partner",
+  },
+  {
+    quote: "Un cadre exceptionnel pour échanger sans filtre sur nos défis en entreprise européenne et bâtir des projets d'envergure internationale.",
+    name: "Marc T.",
+    role: "Consultant Cyber · Francfort",
+    initials: "MT",
+    company: "CyberSec Europe",
   },
 ];
 
-/* ─── MEMBRES EN VEDETTE ─── */
 const MEMBERS = [
-  { name: "Edson K.",  role: "DataOps Engineer",       loc: "Paris",     initials: "EK", src: "/images/community/member-1.jpg", path: "/images/community/member-1.jpg" },
-  { name: "Paul A.",   role: "DevOps · AWS",       loc: "Amsterdam", initials: "PA", src: null as string | null, path: "/images/community/member-2.jpg" },
-  { name: "Inès K.",   role: "Data Scientist",     loc: "Paris",     initials: "IK", src: null as string | null, path: "/images/community/member-3.jpg" },
-  { name: "Boris N.",  role: "Cybersécurité",      loc: "Bruxelles", initials: "BN", src: null as string | null, path: "/images/community/member-4.jpg" },
-  { name: "Claire M.", role: "Product Manager",    loc: "Londres",   initials: "CM", src: null as string | null, path: "/images/community/member-5.jpg" },
-  { name: "Jules B.",  role: "Backend Freelance",  loc: "Zurich",    initials: "JB", src: null as string | null, path: "/images/community/member-6.jpg" },
-  { name: "Diane E.",  role: "ML Engineer",        loc: "Paris",     initials: "DE", src: null as string | null, path: "/images/community/member-7.jpg" },
-  { name: "Marc O.",   role: "Mobile Developer",   loc: "Lyon",      initials: "MO", src: null as string | null, path: "/images/community/member-8.jpg" },
+  { name: "Edson K.", role: "DataOps Engineer", domain: "Data & Cloud", loc: "Paris", initials: "EK", avatar: "/images/community/member-1.jpg" },
+  { name: "Paul A.", role: "DevOps · AWS", domain: "Infrastructure", loc: "Amsterdam", initials: "PA", avatar: null },
+  { name: "Inès K.", role: "Data Scientist", domain: "IA & Analytics", loc: "Paris", initials: "IK", avatar: null },
+  { name: "Boris N.", role: "Cybersécurité", domain: "SecOps", loc: "Bruxelles", initials: "BN", avatar: null },
+  { name: "Claire M.", role: "Product Manager", domain: "Product & UX", loc: "Londres", initials: "CM", avatar: null },
+  { name: "Jules B.", role: "Freelance Backend", domain: "Software", loc: "Zurich", initials: "JB", avatar: null },
 ];
 
-/* ─── PHOTO GROUPE ─── */
-const GROUP_PHOTO: string | null = "/images/community/photo-groupe.jpg"; // "/images/community/photo-groupe.jpg"
+export default function Community({ isHomePreview = false }: { isHomePreview?: boolean }) {
+  const [photoOpen, setPhotoOpen] = useState(false);
 
-export default function Community() {
+  const testiTrackRef = useRef<HTMLDivElement>(null);
+  const [canScrollTestiLeft, setCanScrollTestiLeft] = useState(false);
+  const [canScrollTestiRight, setCanScrollTestiRight] = useState(true);
+
+  const checkTestiScroll = () => {
+    if (testiTrackRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = testiTrackRef.current;
+      setCanScrollTestiLeft(scrollLeft > 10);
+      setCanScrollTestiRight(scrollLeft + clientWidth < scrollWidth - 10);
+    }
+  };
+
+  const scrollTesti = (direction: "left" | "right") => {
+    if (testiTrackRef.current) {
+      const amount = 380;
+      testiTrackRef.current.scrollBy({
+        left: direction === "left" ? -amount : amount,
+        behavior: "smooth",
+      });
+      setTimeout(checkTestiScroll, 320);
+    }
+  };
+
+  const membersTrackRef = useRef<HTMLDivElement>(null);
+  const [canScrollMembersLeft, setCanScrollMembersLeft] = useState(false);
+  const [canScrollMembersRight, setCanScrollMembersRight] = useState(true);
+
+  const checkMembersScroll = () => {
+    if (membersTrackRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = membersTrackRef.current;
+      setCanScrollMembersLeft(scrollLeft > 10);
+      setCanScrollMembersRight(scrollLeft + clientWidth < scrollWidth - 10);
+    }
+  };
+
+  const scrollMembers = (direction: "left" | "right") => {
+    if (membersTrackRef.current) {
+      const amount = 200;
+      membersTrackRef.current.scrollBy({
+        left: direction === "left" ? -amount : amount,
+        behavior: "smooth",
+      });
+      setTimeout(checkMembersScroll, 320);
+    }
+  };
+
   return (
-    <section id="community" style={{ background: "var(--bg)", padding: "7rem 0", position: "relative", overflow: "hidden" }}>
-      {/* Ambient glow */}
-      <div style={{ position: "absolute", top: "30%", left: -100, width: 400, height: 400, background: "radial-gradient(circle, rgba(15,143,91,0.04), transparent 70%)", pointerEvents: "none" }} />
-
-      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.75rem" }}>
-
-        {/* ── HEADER ── */}
-        <FadeUp>
-          <SecLabel>Communauté</SecLabel>
-          <SecTitle>Des talents qui <Hl>inspirent.</Hl></SecTitle>
-          <p style={{ color: "var(--muted)", fontSize: 16, lineHeight: 1.72, maxWidth: 520, marginTop: "0.85rem" }}>
-            Étudiants, ingénieurs, entrepreneurs, designers — une communauté unie autour d&apos;une même ambition : construire l&apos;impact.
+    <section id="community">
+      <div className="ct">
+        <div className="rev">
+          <div className="label">Communauté des Talents</div>
+          <h2 className="sec">Des talents qui <span className="g">inspirent.</span></h2>
+          <p className="desc">
+            La force de Camer&apos;Tech Europe, ce sont ses membres — étudiants, ingénieurs, chercheurs et entrepreneurs unis autour d&apos;une même ambition d&apos;excellence.
           </p>
-        </FadeUp>
-
-        {/* ── PHOTO DE GROUPE ── */}
-        <FadeUp style={{ marginTop: "3.5rem", marginBottom: "3.5rem" }}>
-          <div style={{
-            width: "100%", borderRadius: 22,
-            overflow: "hidden", border: "1px solid var(--border2)",
-            position: "relative", aspectRatio: "21/8",
-            background: "var(--bg2)",
-          }}>
-            {GROUP_PHOTO ? (
-              <>
-                <Image
-                  src={GROUP_PHOTO}
-                  alt="Communauté Camer'Tech Europe"
-                  fill
-                  style={{ objectFit: "cover", objectPosition: "center" }}
-                  sizes="100vw"
-                />
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15,143,91,0.15), transparent 40%)" }} />
-              </>
-            ) : (
-              <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, color: "var(--faint)", fontSize: 13 }}>
-                <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(-45deg,transparent,transparent 12px,rgba(15,143,91,0.025) 12px,rgba(15,143,91,0.025) 13px)" }} />
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" style={{ position: "relative", zIndex: 1, opacity: 0.4 }}>
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-                </svg>
-                <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-                  Photo de groupe CamerTech Europe<br />
-                  <code style={{ fontSize: 10 }}>/images/community/photo-groupe.jpg</code>
-                </div>
-              </div>
-            )}
-
-            {/* Floating badge sur la photo */}
-            <div style={{
-              position: "absolute", bottom: 20, left: 24,
-              background: "rgba(8,12,9,0.75)", backdropFilter: "blur(12px)",
-              borderRadius: 12, padding: "0.75rem 1.1rem",
-              border: "1px solid rgba(255,255,255,0.1)",
-            }}>
-              <span style={{ fontFamily: "var(--font-bricolage,sans-serif)", fontWeight: 800, fontSize: 22, color: "#fff", letterSpacing: "-0.04em" }}>350+</span>
-              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginLeft: 8 }}>membres actifs</span>
-            </div>
-          </div>
-        </FadeUp>
-
-        {/* ── TÉMOIGNAGES ── */}
-        <FadeUp style={{ marginBottom: "1.5rem" }}>
-          <SecLabel>Témoignages</SecLabel>
-          <SecTitle md>Ce qu&apos;ils <Hl>en disent.</Hl></SecTitle>
-        </FadeUp>
-
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="testi-g"
-          style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18, marginBottom: "5rem" }}
-        >
-          {TESTIMONIALS.map((t) => (
-            <motion.div key={t.name} variants={fadeItem}>
-              <TestiCard {...t} />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* ── MEMBRES ── */}
-        <FadeUp style={{ marginBottom: "1.75rem" }}>
-          <SecLabel>Portraits</SecLabel>
-          <SecTitle md>Quelques <Hl>visages.</Hl></SecTitle>
-          <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.7, maxWidth: 480, marginTop: "0.75rem" }}>
-            Des profils variés, une ambition commune.
-          </p>
-        </FadeUp>
-
-        <motion.div
-          variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="members-g"
-          style={{ display: "grid", gridTemplateColumns: "repeat(8,1fr)", gap: 14, marginBottom: "4rem" }}
-        >
-          {MEMBERS.map((m) => (
-            <motion.div key={m.name} variants={fadeItem}>
-              <MemberCard {...m} />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* ── CTA STRIP ── */}
-        <FadeUp>
-          <div style={{
-            borderRadius: 22,
-            background: "var(--green)",
-            padding: "3rem 3.5rem",
-            display: "grid",
-            gridTemplateColumns: "1fr auto",
-            alignItems: "center",
-            gap: "2.5rem",
-            position: "relative",
-            overflow: "hidden",
-          }} className="cta-strip-g">
-            {/* Decorative circles */}
-            <div style={{ position: "absolute", right: -60, top: -60, width: 260, height: 260, borderRadius: "50%", background: "rgba(255,255,255,0.04)", pointerEvents: "none" }} />
-            <div style={{ position: "absolute", right: 80, bottom: -80, width: 200, height: 200, borderRadius: "50%", background: "rgba(255,255,255,0.03)", pointerEvents: "none" }} />
-            {/* Yellow dot accent */}
-            <div style={{ position: "absolute", top: 20, left: 20, width: 10, height: 10, borderRadius: "50%", background: "var(--yellow)", opacity: 0.7 }} />
-
-            <div style={{ position: "relative" }}>
-              <div style={{ fontFamily: "var(--font-bricolage,sans-serif)", fontSize: "clamp(1.3rem,2.5vw,1.9rem)", fontWeight: 800, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1.15, marginBottom: "0.6rem" }}>
-                Rejoignez 350+ membres actifs.
-              </div>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.72)", lineHeight: 1.6, maxWidth: 460 }}>
-                Étudiants, développeurs, freelances, entrepreneurs — la communauté vous attend.
-              </p>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0, position: "relative" }}>
-              <Btn href="/#join" variant="white">Rejoindre la communauté</Btn>
-              <Btn href="/#events" variant="ghost" size="sm">
-                <span style={{ color: "rgba(255,255,255,0.75)", fontSize: 13 }}>Voir les événements →</span>
-              </Btn>
-            </div>
-          </div>
-        </FadeUp>
-      </div>
-
-      <style>{`
-        .testi-g { grid-template-columns: repeat(3,1fr) !important; }
-        .members-g { grid-template-columns: repeat(8,1fr) !important; }
-        .cta-strip-g { grid-template-columns: 1fr auto !important; }
-        @media(max-width:1000px){ .members-g { grid-template-columns: repeat(4,1fr) !important; } }
-        @media(max-width:768px){ .testi-g { grid-template-columns: 1fr !important; } .members-g { grid-template-columns: repeat(4,1fr) !important; } .cta-strip-g { grid-template-columns: 1fr !important; } }
-        @media(max-width:560px){ .members-g { grid-template-columns: repeat(3,1fr) !important; } }
-        .testi-card-quote { opacity: 0.2; }
-        .member-card-img { transition: transform .3s ease; }
-        .member-card:hover .member-card-img { transform: scale(1.06); }
-      `}</style>
-    </section>
-  );
-}
-
-/* ── Testimonial card ── */
-function TestiCard({ quote, name, role, company, initials, src, path }: typeof TESTIMONIALS[0]) {
-  return (
-    <div
-      style={{
-        background: "var(--card)", border: "1px solid var(--border2)",
-        borderRadius: 20, padding: "1.9rem",
-        display: "flex", flexDirection: "column",
-        transition: "all .3s", cursor: "default",
-        height: "100%",
-      }}
-      onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.boxShadow = "var(--sh-lg)"; el.style.borderColor = "var(--border)"; el.style.transform = "translateY(-3px)"; }}
-      onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.boxShadow = "none"; el.style.borderColor = "var(--border2)"; el.style.transform = ""; }}
-    >
-      {/* Quote icon */}
-      <svg className="testi-card-quote" width="32" height="24" viewBox="0 0 32 24" fill="var(--green)" style={{ marginBottom: "1rem", flexShrink: 0 }}>
-        <path d="M0 24V14.4C0 6.56 4.24 1.68 12.72 0L14.4 2.64C10.32 3.6 8.0 5.96 7.2 9.6H13.2V24H0ZM18.8 24V14.4C18.8 6.56 23.04 1.68 31.52 0L33.2 2.64C29.12 3.6 26.8 5.96 26 9.6H32V24H18.8Z"/>
-      </svg>
-
-      <p style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.75, flex: 1, marginBottom: "1.5rem" }}>
-        {quote}
-      </p>
-
-      <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: "1.25rem", borderTop: "1px solid var(--border2)" }}>
-        <div style={{ width: 46, height: 46, borderRadius: "50%", overflow: "hidden", position: "relative", border: "2px solid var(--border)", flexShrink: 0, background: "var(--green-light)" }}>
-          {src ? (
-            <Image src={src} alt={name} fill style={{ objectFit: "cover" }} sizes="46px" />
-          ) : (
-            <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-bricolage,sans-serif)", fontWeight: 800, fontSize: 15, color: "var(--green)" }}>
-              {initials}
-            </div>
-          )}
         </div>
-        <div>
-          <div style={{ fontFamily: "var(--font-bricolage,sans-serif)", fontSize: 14, fontWeight: 700, color: "var(--text)", letterSpacing: "-0.01em" }}>{name}</div>
-          <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>{role} · {company}</div>
-        </div>
-        {/* Stars */}
-        <div style={{ marginLeft: "auto", display: "flex", gap: 2 }}>
-          {[...Array(5)].map((_, i) => (
-            <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="var(--yellow)" stroke="none">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
-/* ── Member card ── */
-function MemberCard({ name, role, loc, initials, src, path }: typeof MEMBERS[0]) {
-  return (
-    <div className="member-card" style={{
-      display: "flex", flexDirection: "column", alignItems: "center",
-      gap: 0, cursor: "default", textAlign: "center",
-    }}>
-      {/* Photo */}
-      <div style={{ width: "100%", aspectRatio: "1/1", borderRadius: 16, overflow: "hidden", position: "relative", background: "var(--green-light)", marginBottom: "0.75rem", border: "1.5px solid var(--border2)" }}>
-        {src ? (
-          <Image src={src} alt={name} fill className="member-card-img" style={{ objectFit: "cover" }} sizes="120px" />
-        ) : (
-          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-bricolage,sans-serif)", fontWeight: 800, fontSize: "clamp(14px,2vw,20px)", color: "var(--green)" }}>
-            {initials}
+        {!isHomePreview && (
+          <div
+            className="rev"
+            onClick={() => setPhotoOpen(true)}
+            style={{ width: "100%", aspectRatio: "21/8", borderRadius: "var(--rl)", margin: "3rem 0", position: "relative", overflow: "hidden", cursor: "pointer" }}
+          >
+            <Image
+              src="/images/community/photo-groupe.jpg"
+              alt="Membres réunis de Camer'Tech Europe"
+              fill
+              style={{ objectFit: "cover", transition: "transform 0.4s" }}
+              className="hover:scale-105"
+              sizes="(max-width: 1100px) 100vw, 1100px"
+            />
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.25rem 1.75rem", background: "linear-gradient(to top, rgba(0,0,0,0.75), transparent)", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: 14, fontWeight: 600 }}>Rassemblement annuel des membres · Promotion 2024</span>
+              <span style={{ fontSize: 12, background: "rgba(255,255,255,0.2)", padding: "4px 10px", borderRadius: 6, backdropFilter: "blur(4px)" }}>Agrandir la photo ↗</span>
+            </div>
           </div>
         )}
-        {/* Hover overlay */}
-        <div className="member-card-img" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,143,91,0.35), transparent 50%)", opacity: 0, transition: "opacity .3s" }} />
+
+        {/* Testimonials / Retours d'expérience en carrousel horizontal */}
+        <div className="rev" style={{ marginTop: "2rem", marginBottom: "1.25rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 14 }}>
+            <div>
+              <div className="label">Retours d&apos;expérience</div>
+              <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text)" }}>
+                Ce que disent <span className="g">nos membres.</span>
+              </h3>
+            </div>
+
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <span style={{ fontSize: 12, color: "var(--muted)", fontWeight: 500, marginRight: 2 }}>
+                Faire défiler
+              </span>
+              <button
+                type="button"
+                onClick={() => scrollTesti("left")}
+                disabled={!canScrollTestiLeft}
+                className="carousel-nav-btn"
+                aria-label="Témoignage précédent"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTesti("right")}
+                disabled={!canScrollTestiRight}
+                className="carousel-nav-btn"
+                aria-label="Témoignage suivant"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          ref={testiTrackRef}
+          onScroll={checkTestiScroll}
+          className="testi-carousel-track"
+        >
+          {TESTIMONIALS.map((t, i) => (
+            <div key={i} className="testi-slide">
+              <div className="card testi rev" style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                    <div style={{ display: "flex", gap: 3, color: "var(--yellow)" }}>
+                      {[...Array(5)].map((_, s) => (
+                        <Star key={s} size={14} fill="currentColor" />
+                      ))}
+                    </div>
+                    <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--green)", display: "flex", alignItems: "center", gap: 4 }}>
+                      <ShieldCheck size={13} /> {t.company}
+                    </span>
+                  </div>
+                  <p className="testi-q">&ldquo;{t.quote}&rdquo;</p>
+                </div>
+
+                <div className="testi-author" style={{ marginTop: 18 }}>
+                  <div className="t-avatar">{t.initials}</div>
+                  <div>
+                    <div className="t-name">{t.name}</div>
+                    <div className="t-role">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Portraits membres en rail horizontal */}
+        <div className="rev" style={{ marginBottom: "1.25rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 14 }}>
+            <div>
+              <div className="label">Trombinoscope</div>
+              <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(1.4rem,2.5vw,2rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text)" }}>
+                Quelques <span className="g">visages de la communauté.</span>
+              </h3>
+            </div>
+
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <span style={{ fontSize: 12, color: "var(--muted)", fontWeight: 500, marginRight: 2 }}>
+                Faire défiler
+              </span>
+              <button
+                type="button"
+                onClick={() => scrollMembers("left")}
+                disabled={!canScrollMembersLeft}
+                className="carousel-nav-btn"
+                aria-label="Membres précédents"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollMembers("right")}
+                disabled={!canScrollMembersRight}
+                className="carousel-nav-btn"
+                aria-label="Membres suivants"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          ref={membersTrackRef}
+          onScroll={checkMembersScroll}
+          className="members-carousel-track"
+        >
+          {MEMBERS.map((m, idx) => (
+            <div key={idx} className="member-slide">
+              <div className="card m-card rev" style={{ height: "100%", transition: "transform 0.2s" }}>
+                <div className="m-av">
+                  {m.avatar ? (
+                    <Image
+                      src={m.avatar}
+                      alt={m.name}
+                      fill
+                      style={{ objectFit: "cover" }}
+                      sizes="56px"
+                    />
+                  ) : (
+                    m.initials
+                  )}
+                </div>
+                <div className="m-name">{m.name}</div>
+                <div className="m-role">{m.role}</div>
+                <div className="m-loc" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 3, marginTop: 4 }}>
+                  <MapPin size={11} /> {m.loc}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA strip */}
+        <div className="cta-strip rev">
+          <div>
+            <h3>Rejoignez plus de 350 membres actifs en Europe.</h3>
+            <p>Étudiants, développeurs, freelances, lead techs et fondateurs — la communauté vous attend.</p>
+          </div>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+            <a
+              href="https://chat.whatsapp.com/JMfCwBhvTElKcznb1qyH6S?s=cl&p=i&ilr=4&iam=0"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-white"
+            >
+              Rejoindre la communauté <ArrowRight size={15} style={{ marginLeft: 4 }} />
+            </a>
+            {isHomePreview && (
+              <Link
+                href="/communaute"
+                className="btn btn-o"
+                style={{ background: "rgba(255,255,255,0.12)", color: "#fff", borderColor: "rgba(255,255,255,0.25)" }}
+              >
+                Explorer toute la communauté <ArrowRight size={14} />
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
-      <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", letterSpacing: "-0.01em", lineHeight: 1.2 }}>{name}</div>
-      <div style={{ fontSize: 11.5, color: "var(--green)", marginTop: 2 }}>{role}</div>
-      <div style={{ fontSize: 11, color: "var(--faint)", marginTop: 1 }}>{loc}</div>
-    </div>
+
+      {/* Lightbox photo groupe */}
+      {photoOpen && (
+        <div
+          onClick={() => setPhotoOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.92)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 24,
+          }}
+        >
+          <button
+            onClick={() => setPhotoOpen(false)}
+            style={{
+              position: "absolute",
+              top: 20,
+              right: 24,
+              width: 44,
+              height: 44,
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.15)",
+              border: "none",
+              color: "#fff",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-label="Fermer"
+          >
+            <X size={22} />
+          </button>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ position: "relative", maxWidth: 1100, width: "100%", maxHeight: "85vh", aspectRatio: "21/8" }}
+          >
+            <Image
+              src="/images/community/photo-groupe.jpg"
+              alt="Photo de groupe Camer'Tech Europe"
+              fill
+              style={{ objectFit: "contain" }}
+              sizes="1100px"
+              priority
+            />
+          </div>
+        </div>
+      )}
+    </section>
   );
 }
